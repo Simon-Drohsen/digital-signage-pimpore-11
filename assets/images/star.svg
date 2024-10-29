@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Ebene_1" data-name="Ebene 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28.656 28.658">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #f6dc8e;
+        stroke-width: 0px;
+      }
+    </style>
+  </defs>
+  <path id="Icon_open-star" class="cls-1" d="m14.329,0l-3.582,10.747H0l8.956,7.165-3.583,10.746,8.956-7.165,8.956,7.165-3.585-10.746,8.956-7.165h-10.744L14.329,0Z"/>
+</svg>

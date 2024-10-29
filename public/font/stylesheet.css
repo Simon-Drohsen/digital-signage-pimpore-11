@@ -1,0 +1,270 @@
+/*
+ *
+ * INSTRUCTIONS
+ *
+ * Copy the Legal Disclaimer and the @font-faces statements to your regular CSS file.
+ * The font file(s) should be placed relative to the regular CSS file.
+ *
+ */
+
+/*
+ * Legal Disclaimer for Web licence
+ *
+ * Licence to use self-hosted webfonts for displaying dynamic text on specified website domains. Our package includes WOFF and WOFF2 font formats.
+ *
+ * Should the license page views limit be exceeded the license holder will be required to contact Lineto.com for an upgrade.
+ * 
+ * It is strictly prohibited to rename the font and to download or use these fonts in any other media. 
+ * 
+ * These Web fonts are licensed exclusively for the use on the following domain(s) and their subdomains:
+ *
+ * instride.ch (monthly pageviews: <50K)
+ *
+ */
+
+/* complete */
+
+@font-face {
+  font-family: "BrownLLWeb-ThinItalic";
+  src: url("BrownLLWeb-ThinItalic.woff") format("woff");
+}
+
+@font-face {
+  font-family: "BrownLLWeb-ThinItalic";
+  src: url("BrownLLWeb-ThinItalic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "BrownLLWeb-Italic";
+  src: url("BrownLLWeb-Italic.woff") format("woff");
+}
+
+@font-face {
+  font-family: "BrownLLWeb-Italic";
+  src: url("BrownLLWeb-Italic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "BrownLLWeb-LightItalic";
+  src: url("BrownLLWeb-LightItalic.woff") format("woff");
+}
+
+@font-face {
+  font-family: "BrownLLWeb-LightItalic";
+  src: url("BrownLLWeb-LightItalic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "BrownLLWeb-Thin";
+  src: url("BrownLLWeb-Thin.woff") format("woff");
+}
+
+@font-face {
+  font-family: "BrownLLWeb-Thin";
+  src: url("BrownLLWeb-Thin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "BrownLLWeb-Regular";
+  src: url("BrownLLWeb-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "BrownLLWeb-Regular";
+  src: url("BrownLLWeb-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "BrownLLWeb-Bold";
+  src: url("BrownLLWeb-Bold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "BrownLLWeb-Bold";
+  src: url("BrownLLWeb-Bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "BrownLLWeb-Light";
+  src: url("BrownLLWeb-Light.woff") format("woff");
+}
+
+@font-face {
+  font-family: "BrownLLWeb-Light";
+  src: url("BrownLLWeb-Light.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "BrownLLWeb-MediumItalic";
+  src: url("BrownLLWeb-MediumItalic.woff") format("woff");
+}
+
+@font-face {
+  font-family: "BrownLLWeb-MediumItalic";
+  src: url("BrownLLWeb-MediumItalic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "BrownLLWeb-Medium";
+  src: url("BrownLLWeb-Medium.woff") format("woff");
+}
+
+@font-face {
+  font-family: "BrownLLWeb-Medium";
+  src: url("BrownLLWeb-Medium.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "BrownLLWeb-Black";
+  src: url("BrownLLWeb-Black.woff") format("woff");
+}
+
+@font-face {
+  font-family: "BrownLLWeb-Black";
+  src: url("BrownLLWeb-Black.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "BrownLLWeb-BoldItalic";
+  src: url("BrownLLWeb-BoldItalic.woff") format("woff");
+}
+
+@font-face {
+  font-family: "BrownLLWeb-BoldItalic";
+  src: url("BrownLLWeb-BoldItalic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "BrownLLWeb-BlackItalic";
+  src: url("BrownLLWeb-BlackItalic.woff") format("woff");
+}
+
+@font-face {
+  font-family: "BrownLLWeb-BlackItalic";
+  src: url("BrownLLWeb-BlackItalic.woff2") format("woff2");
+}
+
+
+/* subset */
+
+@font-face {
+  font-family: "BrownLLSub-ThinItalic";
+  src: url("BrownLLSub-ThinItalic.woff") format("woff");
+}
+
+@font-face {
+  font-family: "BrownLLSub-ThinItalic";
+  src: url("BrownLLSub-ThinItalic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "BrownLLSub-Italic";
+  src: url("BrownLLSub-Italic.woff") format("woff");
+}
+
+@font-face {
+  font-family: "BrownLLSub-Italic";
+  src: url("BrownLLSub-Italic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "BrownLLSub-LightItalic";
+  src: url("BrownLLSub-LightItalic.woff") format("woff");
+}
+
+@font-face {
+  font-family: "BrownLLSub-LightItalic";
+  src: url("BrownLLSub-LightItalic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "BrownLLSub-Thin";
+  src: url("BrownLLSub-Thin.woff") format("woff");
+}
+
+@font-face {
+  font-family: "BrownLLSub-Thin";
+  src: url("BrownLLSub-Thin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "BrownLLSub-Regular";
+  src: url("BrownLLSub-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "BrownLLSub-Regular";
+  src: url("BrownLLSub-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "BrownLLSub-Bold";
+  src: url("BrownLLSub-Bold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "BrownLLSub-Bold";
+  src: url("BrownLLSub-Bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "BrownLLSub-Light";
+  src: url("BrownLLSub-Light.woff") format("woff");
+}
+
+@font-face {
+  font-family: "BrownLLSub-Light";
+  src: url("BrownLLSub-Light.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "BrownLLSub-MediumItalic";
+  src: url("BrownLLSub-MediumItalic.woff") format("woff");
+}
+
+@font-face {
+  font-family: "BrownLLSub-MediumItalic";
+  src: url("BrownLLSub-MediumItalic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "BrownLLSub-Medium";
+  src: url("BrownLLSub-Medium.woff") format("woff");
+}
+
+@font-face {
+  font-family: "BrownLLSub-Medium";
+  src: url("BrownLLSub-Medium.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "BrownLLSub-Black";
+  src: url("BrownLLSub-Black.woff") format("woff");
+}
+
+@font-face {
+  font-family: "BrownLLSub-Black";
+  src: url("BrownLLSub-Black.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "BrownLLSub-BoldItalic";
+  src: url("BrownLLSub-BoldItalic.woff") format("woff");
+}
+
+@font-face {
+  font-family: "BrownLLSub-BoldItalic";
+  src: url("BrownLLSub-BoldItalic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "BrownLLSub-BlackItalic";
+  src: url("BrownLLSub-BlackItalic.woff") format("woff");
+}
+
+@font-face {
+  font-family: "BrownLLSub-BlackItalic";
+  src: url("BrownLLSub-BlackItalic.woff2") format("woff2");
+}
+
+
