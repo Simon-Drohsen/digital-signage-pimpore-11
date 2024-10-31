@@ -39,11 +39,17 @@
                             </div>
                         </div>
                     {% else %}
-{#                        <div class="relative bg-cover bg-center min-w-[836px] min-h-[535px]" style="background-image:url('../uploads/images/events/{{ nextEvent.image }}')">#}
-{#                            <div class="laptop:block w-36 h-36 rounded-full bg-midnight absolute -bottom-16 -right-16">#}
-{#                                <img src="{{ asset('build/images/calendar.svg') }}" width="100" class="ml-8 mt-8" alt="">#}
-{#                            </div>#}
-{#                        </div>#}
+                        <div class="relative bg-cover bg-center min-w-[836px] min-h-[535px]">
+                            {{ nextEvent.image|pimcore_image_thumbnail_html('nextEvent--image', {
+                                'disableAutoAlt': false,
+                                'disableAutoCopyright': true,
+                                'disableAutoTitle': true,
+                                'imgAttributes': {'class': 'w-full h-full'}
+                            }) }}
+                            <div class="laptop:block w-36 h-36 rounded-full bg-midnight absolute -bottom-16 -right-16">
+                                <img src="{{ asset('build/images/calendar.svg') }}" width="100" class="ml-8 mt-8" alt="">
+                            </div>
+                        </div>
                     {% endif %}
                 </div>
             </twig:Common:Container>

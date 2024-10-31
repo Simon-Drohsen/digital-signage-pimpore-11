@@ -36,11 +36,16 @@
                 <div class="absolute -top-10 -left-8 animate-balloons">
                     <img src="{{ asset('build/images/balloons.svg') }}" alt="ballons">
                 </div>
-{#                {% if nextBirthday.image is not null %}#}
-{#                    <div>#}
-{#                        <img class="bg-white size-96" src="../uploads/images/employees/{{ nextBirthday.getImagePath }}" alt="{{ nextBirthday.getEmployeeFirstname }}">#}
-{#                    </div>#}
-{#                {% endif %}#}
+                {% if nextBirthday.image is not null %}
+                    <div>
+                        {{ nextBirthday.image|pimcore_image_thumbnail_html('nextBirthday--image', {
+                            'disableAutoAlt': false,
+                            'disableAutoCopyright': true,
+                            'disableAutoTitle': true,
+                            'imgAttributes': {'class': 'w-full h-full'}
+                        }) }}
+                    </div>
+                {% endif %}
             </div>
 
             <div class="animate-firework absolute top-16 right-36 animation-delay-[1.75s]">

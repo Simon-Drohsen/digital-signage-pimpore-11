@@ -1,0 +1,21 @@
+pimcore:
+    assets:
+        image:
+            thumbnails:
+                definitions:
+                    nextBirthday--image:
+                        items: {  }
+                        medias: {  }
+                        name: nextBirthday--image
+                        description: ''
+                        group: ''
+                        format: SOURCE
+                        quality: 85
+                        highResolution: null
+                        preserveColor: false
+                        preserveMetaData: false
+                        rasterizeSVG: false
+                        downloadable: false
+                        modificationDate: 1730378668
+                        creationDate: 1730378643
+                        preserveAnimation: false
