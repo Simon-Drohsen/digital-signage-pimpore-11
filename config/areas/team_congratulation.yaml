@@ -1,0 +1,9 @@
+services:
+    App\Document\Areabrick\TeamCongratulation:
+        parent: ToolboxBundle\Document\Areabrick\AbstractAreabrick
+        tags:
+            - {
+                name: toolbox.area.brick,
+                id: 'team_congratulation',
+                title: 'Team Congratulation',
+            }

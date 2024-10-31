@@ -1,5 +1,5 @@
 import { Controller } from '@hotwired/stimulus';
-import.meta.stimulusFetch = "eager";
+import.meta.stimulusFetch = 'eager';
 import.meta.stimulusIdentifier = "countdown";
 
 export default class extends Controller {

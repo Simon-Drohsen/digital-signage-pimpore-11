@@ -1,0 +1,9 @@
+services:
+    App\Document\Areabrick\EventList:
+        parent: ToolboxBundle\Document\Areabrick\AbstractAreabrick
+        tags:
+            - {
+                name: toolbox.area.brick,
+                id: 'event_list',
+                title: 'Event List',
+            }

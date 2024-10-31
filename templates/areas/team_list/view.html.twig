@@ -1,0 +1,146 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Geburtstagsliste{% endblock %}
+
+{% block html_class %}cursor-none{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+{% endblock %}
+
+{% set startIndex = 0 %}
+{% set batchSize = 10 %}
+{% set employeeCount = employees|length / 10 %}
+{% set employeeCount = employeeCount|round(0, 'ceil') - 1 %}
+{% set wait = employees|length * 15 %}
+
+{% block redirects %}
+    {% if nextBirthdays|length == 0 %}
+        {{ wait }};url={{ document.getProperty('event_list_navigation') }}
+    {% elseif nextBirthdays|first.birthday|date('m/d') == "now"|date('m/d') %}
+        {{ wait }};url={{ document.getProperty('birthday_congratulation_navigation') }}
+    {% else %}
+        {{ wait }};url={{ document.getProperty('event_list_navigation') }}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <header class="pt-4 laptop:pt-6 display:pt-10">
+        <twig:Birthdays:Container>
+            <h1 class="drop-shadow text-white">Geburtstagsliste</h1>
+        </twig:Birthdays:Container>
+    </header>
+
+    {% if employees|length == 0 %}
+        <div class="text-white text-center mt-4">Es gibt keine Geburtstage :(</div>
+    {% else %}
+        <main class="mt-4 display:mt-6">
+            <twig:Birthdays:Container>
+                {% set slider = stimulus_controller('carousel', {
+                    'options': {
+                        'slidesPerView': 2,
+                        'spaceBetween': 330,
+                        'pagination': {
+                            'el': '.swiper-pagination',
+                            'clickable': false,
+                        },
+                        'loop': false,
+                        'autoplay': {
+                            'delay': 15000,
+                        },
+                    }
+                }) %}
+
+                <div class="swiper swiper-container mr-36" {{ slider|raw }}>
+                    <div class="swiper-wrapper">
+                        {% for i in 0..employeeCount %}
+                            <twig:Birthdays:Content:SwiperSlide>
+                                {% for employee in employees|slice(startIndex + i * batchSize, batchSize) %}
+                                    {% if (employee.birthday|format_datetime(pattern: 'Y') + 1) % 10 == 0 %}
+                                        {% set round = true %}
+                                    {% else %}
+                                        {% set round = false %}
+                                    {% endif %}
+                                    {% set next = false %}
+                                    {% for nextBirthday in nextBirthdays %}
+                                        {% if not next %}
+                                            {% set next = nextBirthday.firstname == employee.firstname %}
+                                        {% endif %}
+                                    {% endfor %}
+
+                                    {% if employee.nickname %}
+                                        <twig:Birthdays:Content:TableLine name="{{ employee.nickname }}"
+                                            date="{{ employee.birthday|format_datetime(pattern: 'd. MMMM', locale: 'de') }}"
+                                            year="{{ employee.birthday|date('Y') }}"
+                                            round="{{ round }}"
+                                            soon="{{ next }}"
+                                        />
+                                    {% else %}
+                                        <twig:Birthdays:Content:TableLine name="{{ employee.firstname }}"
+                                            date="{{ employee.birthday|format_datetime(pattern: 'd. MMMM', locale: 'de') }}"
+                                            year="{{ employee.birthday|date('Y') }}"
+                                            round="{{ round }}"
+                                            soon="{{ next }}"
+                                        />
+                                    {% endif %}
+                                {% endfor %}
+                            </twig:Birthdays:Content:SwiperSlide>
+                        {% endfor %}
+                    </div>
+
+                    <div class="mt-6 laptop:mt-8 display:mt-10">
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+            </twig:Birthdays:Container>
+        </main>
+
+        <div class="absolute right-2 bottom-5">
+            <div class="text-mustard border-2 p-2 mr-20 max-w-3xl">
+                <p class="text-2xl font-light">
+                    <span class="font-black">Achtung:</span>
+                    <span>
+                        {% if nextBirthdays|length == 1 %}
+                            {% for nextBirthday in nextBirthdays %}
+                                {% if nextBirthday.nickname %}
+                                    {{ nextBirthday.nickname }} hat am {{ nextBirthday.birthday|format_datetime(pattern: 'd. MMMM', locale: 'de') }} Geburtstag.
+                                {% else %}
+                                    {{ nextBirthday.firstname }} hat am {{ nextBirthday.birthday|format_datetime(pattern: 'd. MMMM', locale: 'de') }} Geburtstag.
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            {% for nextBirthday in nextBirthdays %}
+                                {% if loop.last %}
+                                    {% if nextBirthday.nickname %}
+                                        und {{ nextBirthday.firstname }} haben am {{ nextBirthday.birthday|format_datetime(pattern: 'd. MMMM', locale: 'de') }} Geburtstag.
+                                    {% else %}
+                                        und {{ nextBirthday.firstname }} haben am {{ nextBirthday.birthday|format_datetime(pattern: 'd. MMMM', locale: 'de') }} Geburtstag.
+                                    {% endif %}
+                                {% else %}
+                                    {% if nextBirthday.nickname %}
+                                        {{ nextBirthday.nickname }},
+                                    {% else %}
+                                        {{ nextBirthday.firstname }},
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </span>
+                </p>
+            </div>
+
+            <div class="absolute right-0 bottom-6 size-24">
+                <img src="{{ asset('build/images/balloons.svg') }}" alt="balloons">
+            </div>
+        </div>
+    {% endif %}
+    <footer>
+        <twig:Common:Date />
+    </footer>
+{% endblock %}

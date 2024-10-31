@@ -1,0 +1,9 @@
+services:
+    App\Document\Areabrick\RandomFact:
+        parent: ToolboxBundle\Document\Areabrick\AbstractAreabrick
+        tags:
+            - {
+                name: toolbox.area.brick,
+                id: 'fact',
+                title: 'Fact',
+            }

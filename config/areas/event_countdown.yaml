@@ -1,0 +1,9 @@
+services:
+    App\Document\Areabrick\EventCountdown:
+        parent: ToolboxBundle\Document\Areabrick\AbstractAreabrick
+        tags:
+            - {
+                name: toolbox.area.brick,
+                id: 'event_countdown',
+                title: 'Event Countdown',
+            }

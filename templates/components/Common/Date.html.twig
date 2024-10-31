@@ -1,0 +1,6 @@
+<div class="fixed left-0 bottom-0 right-0 pb-10">
+    <twig:Common:Container class="text-white" data-controller="current-time">
+        <p class="font-black text-2xl" {{ stimulus_target('current-time', 'clock') }}></p>
+        <p class="text-sm mt-1" {{ stimulus_target('current-time', 'date') }}></p>
+    </twig:Common:Container>
+</div>

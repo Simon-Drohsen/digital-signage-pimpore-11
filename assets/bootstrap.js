@@ -1,15 +1,7 @@
-import { Application } from 'stimulus';
-import Carousel from 'stimulus-carousel';
+// import Carousel from 'stimulus-carousel';
+import { Application } from "@hotwired/stimulus"
+import { definitionsFromContext } from "@hotwired/stimulus-webpack-helpers"
 
-const app = Application.start();
-
-const context = require.context('./js/controllers', true, /_controller\.js$/);
-context.keys().forEach((filename) => {
-    const controllerModule = context(filename);
-    const controllerName = filename.replace('./', '').replace('_controller.js', '').replace(/\//g, '--');
-    app.register(controllerName, controllerModule.default || controllerModule);
-});
-
-app.register('carousel', Carousel);
-
-export { app };
+window.Stimulus = Application.start()
+const context = require.context("./js/controllers", true, /\.js$/)
+Stimulus.load(definitionsFromContext(context))

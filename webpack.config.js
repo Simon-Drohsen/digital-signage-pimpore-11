@@ -8,6 +8,7 @@ Encore
     .cleanupOutputBeforeBuild()
     .enablePostCssLoader()
     .enableSassLoader()
+    .enableVersioning()
     .configureBabel((config) => {
         config.plugins.push('@babel/plugin-proposal-class-properties');
     }, {
@@ -17,6 +18,11 @@ Encore
     .configureBabelPresetEnv((config) => {
         config.useBuiltIns = 'usage';
         config.corejs = 3;
+    })
+    .copyFiles({
+        from: './assets/images',
+        to: 'images/[path][name].[hash:8].[ext]',
+        pattern: /\.(jpe?g|png|gif|svg|webp)$/i,
     })
     .enableSourceMaps(!Encore.isProduction())
     .enableVersioning(Encore.isProduction());

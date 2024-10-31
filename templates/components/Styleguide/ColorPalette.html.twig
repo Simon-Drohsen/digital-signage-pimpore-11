@@ -1,0 +1,8 @@
+{% set color_map = {
+    'lagoon': 'bg-lagoon text-white',
+    'midnight': 'bg-midnight text-white',
+    'mustard': 'bg-mustard text-white',
+    'coral': 'bg-coral text-white',
+} %}
+
+<div class="{{ color_map[color] }} w-full h-36 flex justify-center items-center"><p class="text-styleguide text-center">{{ block('content') }}</p></div>

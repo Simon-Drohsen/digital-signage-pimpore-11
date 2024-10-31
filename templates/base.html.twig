@@ -1,20 +1,31 @@
 <!DOCTYPE html>
 <html class="{% block html_class %}{% endblock %}">
     <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}{% endblock %}</title>
-        <link rel="icon" href="{{ asset('assets/images/favicon/wvision_favicon.png') }}" type="image/x-icon">
-        <meta http-equiv="refresh" content="{% block redirects %}{% endblock %}">
-        <meta name="msapplication-TileColor" content="#da532c">
-        <meta name="theme-color" content="#ffffff">
+        {% block metadata %}
+            {%- if pimcore_website_config('name') is not empty -%}
+                {%- do pimcore_head_title().append(pimcore_website_config('name')) -%}
+                {%- do pimcore_head_title().setSeparator(' – ') -%}
+            {%- endif -%}
 
+            {{ pimcore_head_title() -}}
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <meta name="view-transition" content="same-origin">
+
+            {{ pimcore_head_meta() -}}
+            {{ pimcore_head_link() -}}
+        {% endblock %}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
-
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
+
+        <link rel="icon" href="{{ asset('build/images/favicon/wvision_favicon.png') }}" type="image/x-icon">
+        <meta http-equiv="refresh" content="{% block redirects %}{% endblock %}">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#ffffff">
     </head>
     <body class="bg-midnight {% block body_class %}{% endblock %}">
         {% block body %}{% endblock %}
