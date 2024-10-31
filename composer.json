@@ -22,6 +22,7 @@
     "symfony/dotenv": "^6.2",
     "symfony/runtime": "^6.2",
     "symfony/ux-twig-component": "^2.21",
+    "symfony/twig-bundle": "6.4.x",
     "twig/extra-bundle": "^3.13",
     "twig/html-extra": "^3.13",
     "twig/intl-extra": "^3.13"

@@ -18,26 +18,35 @@ class TeamList extends AbstractAreabrick {
     {
         parent::action($info);
 
+        $checkNextBirthdays = [];
         $nextBirthdays = [];
         $days = 366;
         $employees = new Employee\Listing();
-        $round = false;
 
-        foreach ($employees as $employee) {
-            $birthday = Carbon::parse($employee->getBirthday())->setYear(Carbon::now()->year)->startOfDay();
-            $now = Carbon::now()->startOfDay();
-
-            if ($days >= $now->diffInDays($birthday) && $now->diffInDays($birthday) >= 0) {
-                $nextBirthdays[] = $employee;
-                $days = $now->diffInDays($birthday);
-            }
-        }
+        $checkNextBirthdays = $this->checkNextBirthday($employees, $checkNextBirthdays, $days);
+        $nextBirthdays = $this->checkNextBirthday(array_reverse($checkNextBirthdays), $nextBirthdays, $days);
 
         $info->setParam('employees', $employees->getObjects());
         $info->setParam('nextBirthdays', $nextBirthdays);
         $info->setParam('days', $days);
 
         return null;
+    }
+
+    public function checkNextBirthday($employees, $nextBirthdays, $days)
+    {
+        $now = Carbon::now()->startOfDay();
+
+        foreach ($employees as $employee) {
+            $birthday = Carbon::parse($employee->getBirthday())->setYear(Carbon::now()->year)->startOfDay();
+
+            if ($days >= $now->diffInDays($birthday) && $now->dayOfYear() < $birthday->dayOfYear()) {
+                $nextBirthdays[] = $employee;
+                $days = $now->diffInDays($birthday);
+            }
+        }
+
+        return $nextBirthdays;
     }
 }
 

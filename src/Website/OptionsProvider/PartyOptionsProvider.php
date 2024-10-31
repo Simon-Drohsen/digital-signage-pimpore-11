@@ -15,7 +15,7 @@ class PartyOptionsProvider implements SelectOptionsProviderInterface
         foreach($parties as $party) {
             $options[] = ["key" => $party->getParty(), "value" => $party->getId()];
         }
-        
+
         return $options;
     }
 
@@ -24,7 +24,7 @@ class PartyOptionsProvider implements SelectOptionsProviderInterface
      */
     public function hasStaticOptions(array $context, Data $fieldDefinition): bool
     {
-        return $fieldDefinition->getDefaultValue();
+        return false;
     }
 
     /**
@@ -32,6 +32,6 @@ class PartyOptionsProvider implements SelectOptionsProviderInterface
      */
     public function getDefaultValue(array $context, Data $fieldDefinition): string | array | null
     {
-        return true;
+        return null;
     }
 }
