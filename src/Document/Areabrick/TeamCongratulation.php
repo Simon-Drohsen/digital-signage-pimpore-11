@@ -19,19 +19,22 @@ class TeamCongratulation extends AbstractAreabrick {
         parent::action($info);
         $nextBirthday = null;
         $days = 366;
+        $partyName = $info->getRequest()->get('party');
         $employees = new Employee\Listing();
+
+        $now = Carbon::now()->startOfDay();
 
         foreach ($employees as $employee) {
             $birthday = Carbon::parse($employee->getBirthday())->setYear(Carbon::now()->year)->startOfDay();
-            $now = Carbon::now()->startOfDay();
 
-            if ($days >= $now->diffInDays($birthday) && $now->diffInDays($birthday) >= 0) {
+            if ($days >= $now->diffInDays($birthday) && $now->dayOfYear() < $birthday->dayOfYear()) {
                 $nextBirthday = $employee;
-                $days = $now->diffInDays($birthday);
+                break;
             }
         }
 
         $info->setParam('nextBirthday', $nextBirthday);
+        $info->setParam('party', $partyName);
 
         return null;
     }

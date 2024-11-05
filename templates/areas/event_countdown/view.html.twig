@@ -4,9 +4,9 @@
 
 {% block redirects %}
     {% if fact %}
-        {{ document.getProperty('redirect_timeout') }};url={{ document.getProperty('fact_navigation') }}
+        {{ document.getProperty('redirect_timeout') }};url={{ document.getProperty('fact_navigation') }}?party={{ party }}
     {% else %}
-        {{ document.getProperty('redirect_timeout') }};url={{ document.getProperty('birthday_list_navigation') }}
+        {{ document.getProperty('redirect_timeout') }};url={{ document.getProperty('birthday_list_navigation') }}?party={{ party }}
     {% endif %}
 {% endblock %}
 

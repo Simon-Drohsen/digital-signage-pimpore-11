@@ -6,6 +6,7 @@ use Pimcore\Model\Document;
 use Symfony\Component\HttpFoundation\Response;
 use ToolboxBundle\Document\Areabrick\AbstractAreabrick;
 use Pimcore\Model\DataObject\Event;
+use Pimcore\Model\DataObject\Party;
 
 class EventList extends AbstractAreabrick {
     public function getName(): string
@@ -17,6 +18,22 @@ class EventList extends AbstractAreabrick {
     {
         parent::action($info);
         $events = new Event\Listing();
+        $parties = new Party\Listing();
+        $partyName = $info->getRequest()->get('party');
+        $party = null;
+
+        if($partyName !== null && $partyName !== '') {
+            foreach($parties as $oneParty) {
+                if($oneParty->getParty() === $partyName) {
+                    $party = $oneParty->getId();
+                }
+            }
+
+            $events->setCondition('party = ?', $party);
+        }
+
+        $events->setOrderKey('date');
+
         $nextEvent = null;
         foreach($events as $event) {
             if($event->getDate() > new \DateTime()) {
@@ -27,6 +44,7 @@ class EventList extends AbstractAreabrick {
 
         $info->setParam('events', $events);
         $info->setParam('nextEvent', $nextEvent);
+        $info->setParam('party', $partyName);
         return null;
     }
 }

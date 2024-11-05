@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block redirects %}
-    {{ document.getProperty('redirect_timeout') }};url={{ document.getProperty('birthday_list_navigation') }}
+    {{ document.getProperty('redirect_timeout') }};url={{ document.getProperty('birthday_list_navigation') }}?party={{ party }}
 {% endblock %}
 
 {% block html_class %}cursor-none{% endblock %}
