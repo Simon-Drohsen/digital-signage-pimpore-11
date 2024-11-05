@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="{% block html_class %}{% endblock %}">
+<html {% block html_class %}{% endblock %}>
     <head>
         {% block metadata %}
             {%- if pimcore_website_config('name') is not empty -%}
