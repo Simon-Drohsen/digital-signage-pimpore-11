@@ -28,8 +28,11 @@ class EventList extends AbstractAreabrick {
                     $party = $oneParty->getId();
                 }
             }
-
-            $events->setCondition('party = ?', $party);
+            if ($party !== null) {
+                $events->setCondition('party = ? OR party IS NULL', $party);
+            } else {
+                $events->setCondition('party IS NULL');
+            }
         }
 
         $events->setOrderKey('date');

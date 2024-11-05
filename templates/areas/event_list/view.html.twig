@@ -6,7 +6,7 @@
 
 {% block redirects %}
     {% if events|length == 0 %}
-        ;url={{ document.getProperty('fact_navigation') }}?party={{ party }}
+        0;url={{ document.getProperty('fact_navigation') }}?party={{ party }}
     {% else %}
         {{ document.getProperty('redirect_timeout') }};url={{ document.getProperty('event_countdown_navigation') }}?party={{ party }}
     {% endif %}

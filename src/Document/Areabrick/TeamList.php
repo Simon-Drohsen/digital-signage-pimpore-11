@@ -32,7 +32,11 @@ class TeamList extends AbstractAreabrick {
                     $party = $oneParty->getId();
                 }
             }
-            $employees->setCondition('party = ?', $party);
+            if ($party !== null) {
+                $employees->setCondition('party = ? OR party IS NULL', $party);
+            } else {
+                $employees->setCondition('party IS NULL');
+            }
         }
 
         $sortedEmployees = $this->sortEmployeesByBirthday($employees);

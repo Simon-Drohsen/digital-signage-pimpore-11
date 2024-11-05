@@ -30,7 +30,11 @@ class RandomFact extends AbstractAreabrick {
                     $party = $oneParty->getId();
                 }
             }
-            $facts->setCondition('party = ?', $party);
+            if ($party !== null) {
+                $facts->setCondition('party = ? OR party IS NULL', $party);
+            } else {
+                $facts->setCondition('party IS NULL');
+            }
         }
 
         if (count($facts) === 0) {
