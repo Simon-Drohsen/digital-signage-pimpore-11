@@ -1,6 +1,4 @@
 import { Controller } from '@hotwired/stimulus';
-import.meta.stimulusFetch = "eager";
-import.meta.stimulusIdentifier = "current-time";
 
 export default class extends Controller {
     static targets = ['clock', 'date'];

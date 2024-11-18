@@ -5,7 +5,7 @@
  * Variants: no
  *
  * Fields Summary:
- * - text [input]
+ * - text [wysiwyg]
  * - image [image]
  * - party [select]
  */
@@ -17,7 +17,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1730275451,
+   'modificationDate' => 1731599629,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -61,7 +61,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
          'children' => 
         array (
           0 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+          \Pimcore\Model\DataObject\ClassDefinition\Data\Wysiwyg::__set_state(array(
              'name' => 'text',
              'title' => 'Text',
              'tooltip' => '',
@@ -79,16 +79,11 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'blockedVarsForExport' => 
             array (
             ),
-             'defaultValue' => NULL,
-             'columnLength' => 190,
-             'regex' => '',
-             'regexFlags' => 
-            array (
-            ),
-             'unique' => false,
-             'showCharCount' => false,
+             'toolbarConfig' => '',
+             'excludeFromSearchIndex' => false,
+             'maxCharacters' => '',
+             'height' => '',
              'width' => '',
-             'defaultValueGenerator' => '',
           )),
           1 => 
           \Pimcore\Model\DataObject\ClassDefinition\Data\Image::__set_state(array(
@@ -132,9 +127,9 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'blockedVarsForExport' => 
             array (
             ),
-             'defaultValue' => '1',
+             'defaultValue' => NULL,
              'columnLength' => 190,
-             'dynamicOptions' => false,
+             'dynamicOptions' => true,
              'defaultValueGenerator' => '',
              'width' => '',
              'optionsProviderType' => 'class',
@@ -198,6 +193,71 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'enableGridLocking' => false,
    'deletedDataComponents' => 
   array (
+    0 => 
+    \Pimcore\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
+       'name' => 'localizedfields',
+       'title' => '',
+       'tooltip' => NULL,
+       'mandatory' => false,
+       'noteditable' => false,
+       'index' => false,
+       'locked' => false,
+       'style' => NULL,
+       'permissions' => NULL,
+       'fieldtype' => '',
+       'relationType' => false,
+       'invisible' => false,
+       'visibleGridView' => true,
+       'visibleSearch' => true,
+       'blockedVarsForExport' => 
+      array (
+      ),
+       'children' => 
+      array (
+        0 => 
+        \Pimcore\Model\DataObject\ClassDefinition\Data\Wysiwyg::__set_state(array(
+           'name' => 'text',
+           'title' => 'Text',
+           'tooltip' => '',
+           'mandatory' => false,
+           'noteditable' => false,
+           'index' => false,
+           'locked' => false,
+           'style' => '',
+           'permissions' => NULL,
+           'fieldtype' => '',
+           'relationType' => false,
+           'invisible' => false,
+           'visibleGridView' => false,
+           'visibleSearch' => false,
+           'blockedVarsForExport' => 
+          array (
+          ),
+           'toolbarConfig' => '',
+           'excludeFromSearchIndex' => false,
+           'maxCharacters' => '',
+           'height' => '',
+           'width' => '',
+        )),
+      ),
+       'region' => NULL,
+       'layout' => NULL,
+       'maxTabs' => NULL,
+       'border' => false,
+       'provideSplitView' => false,
+       'tabPosition' => 'top',
+       'hideLabelsWhenTabsReached' => NULL,
+       'referencedFields' => 
+      array (
+      ),
+       'permissionView' => NULL,
+       'permissionEdit' => NULL,
+       'labelWidth' => 100,
+       'labelAlign' => 'left',
+       'width' => '',
+       'height' => '',
+       'fieldDefinitionsCache' => NULL,
+    )),
   ),
    'blockedVarsForExport' => 
   array (

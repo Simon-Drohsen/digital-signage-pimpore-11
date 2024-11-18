@@ -59,6 +59,16 @@ services:
             - .:/var/www/html
             - ./.docker/messenger.yaml:/var/www/html/config/packages/messenger.yaml:ro
 
+    adminer:
+        image: "adminer"
+        restart: "always"
+        volumes:
+            - ".docker/php/php-ini-overrides.ini:/usr/local/etc/php/conf.d/uploads.ini"
+        ports:
+            - "2001:8080"
+        links:
+            - "db:db"
+
     supervisord:
         #user: '1000:1000' # set to your uid:gid
         image: pimcore/pimcore:php8.3-supervisord-latest
@@ -75,27 +85,6 @@ services:
     # The following two services are used for testing.
     # We restrict these services to the test profile only, so we don't spin them up with every `docker compose up`.
     # See: https://docs.docker.com/compose/profiles/
-    test-db:
-        profiles: [ 'test' ]
-        extends: db
-        volumes:
-            - pimcore-test-database:/var/lib/mysql
-
-    test-php:
-        profiles: [ 'test' ]
-        extends: php
-        environment:
-            APP_ENV: test
-            PIMCORE_TEST_DB_DSN: ${PIMCORE_TEST_DB_DSN:-mysql://pimcore:pimcore@test-db/pimcore}
-            PIMCORE_INSTALL_ADMIN_USERNAME: pimcore
-            PIMCORE_INSTALL_ADMIN_PASSWORD: pimcore
-            PIMCORE_INSTALL_MYSQL_HOST_SOCKET: test-db
-        depends_on:
-            test-db:
-                condition: service_healthy
-        volumes:
-            - pimcore-test-var:/var/www/html/var
-            - pimcore-test-public-var:/var/www/html/public/var
 
 volumes:
     pimcore-database:

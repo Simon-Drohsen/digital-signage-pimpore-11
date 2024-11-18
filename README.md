@@ -48,7 +48,7 @@ You don't need to have a PHP environment with composer installed.
    * `docker compose run --rm test-php vendor/bin/pimcore-install -n`
    * `docker compose run --rm test-php vendor/bin/codecept run -vv`
 
-6. :heavy_check_mark: DONE - You can now visit your pimcore instance:
+6. :heavy_check_mark:DONE - You can now visit your pimcore instance:
     * The frontend: <http://localhost>
     * The admin interface, using the credentials you have chosen above:
       <http://localhost/admin>
