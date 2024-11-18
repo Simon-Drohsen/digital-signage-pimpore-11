@@ -22,14 +22,20 @@ class EventList extends AbstractAreabrick {
         $partyName = $info->getRequest()->get('party');
         $party = null;
 
-        if($partyName !== null && $partyName !== '') {
+        if($partyName === '') $partyName = 'all';
+
+        if($partyName !== null && $partyName !== 'all') {
+            $all = null;
             foreach($parties as $oneParty) {
                 if($oneParty->getParty() === $partyName) {
                     $party = $oneParty->getId();
+                } elseif ($oneParty->getParty() === 'all') {
+                    $all = $oneParty->getId();
                 }
             }
+
             if ($party !== null) {
-                $events->setCondition('party = ? OR party IS NULL', $party);
+                $events->setCondition('party = '. $party .' OR party = '. $all);
             } else {
                 $events->setCondition('party IS NULL');
             }

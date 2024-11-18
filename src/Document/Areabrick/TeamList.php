@@ -26,14 +26,20 @@ class TeamList extends AbstractAreabrick {
         $party = null;
         $employees = new Employee\Listing();
 
-        if($partyName !== null && $partyName !== '') {
+        if($partyName === '') $partyName = 'all';
+
+        if($partyName !== null && $partyName !== 'all') {
+            $all = null;
             foreach($parties as $oneParty) {
                 if($oneParty->getParty() === $partyName) {
                     $party = $oneParty->getId();
+                } elseif ($oneParty->getParty() === 'all') {
+                    $all = $oneParty->getId();
                 }
             }
+
             if ($party !== null) {
-                $employees->setCondition('party = ? OR party IS NULL', $party);
+                $employees->setCondition('party = '. $party .' OR party = '. $all);
             } else {
                 $employees->setCondition('party IS NULL');
             }
@@ -60,7 +66,7 @@ class TeamList extends AbstractAreabrick {
         foreach ($employees as $employee) {
             $birthday = Carbon::parse($employee->getBirthday())->setYear($now->year)->startOfDay();
 
-            if ($days >= $now->diffInDays($birthday) && $now->dayOfYear < $birthday->dayOfYear) {
+            if ($days >= $now->diffInDays($birthday) && $now->dayOfYear <= $birthday->dayOfYear) {
                 $birthdayThisYear = true;
                 $nextBirthdays[] = $employee;
                 $days = $now->diffInDays($birthday);

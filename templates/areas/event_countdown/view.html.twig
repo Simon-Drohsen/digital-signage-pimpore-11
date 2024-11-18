@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Events{% endblock %}
+
 {% block html_class %}class="cursor-none"{% endblock %}
 
 {% block redirects %}
@@ -8,10 +10,6 @@
     {% else %}
         {{ document.getProperty('redirect_timeout') }};url={{ document.getProperty('birthday_list_navigation') }}?party={{ party }}
     {% endif %}
-{% endblock %}
-
-{% block title %}
-    Countdown
 {% endblock %}
 
 {% block body %}

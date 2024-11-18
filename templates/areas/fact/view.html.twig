@@ -1,7 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block redirects %}
-    {{ document.getProperty('redirect_timeout') }};url={{ document.getProperty('birthday_list_navigation') }}?party={{ party }}
+    {% if empty %}
+        0;url={{ document.getProperty('birthday_list_navigation') }}?party={{ party }}
+    {% else %}
+        {{ document.getProperty('redirect_timeout') }};url={{ document.getProperty('birthday_list_navigation') }}?party={{ party }}
+    {% endif %}
 {% endblock %}
 
 {% block html_class %}class="cursor-none"{% endblock %}

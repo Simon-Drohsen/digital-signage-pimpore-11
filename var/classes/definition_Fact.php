@@ -17,7 +17,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1731599629,
+   'modificationDate' => 1731925999,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -65,7 +65,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'name' => 'text',
              'title' => 'Text',
              'tooltip' => '',
-             'mandatory' => false,
+             'mandatory' => true,
              'noteditable' => false,
              'index' => false,
              'locked' => false,
@@ -90,7 +90,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'name' => 'image',
              'title' => 'Image',
              'tooltip' => '',
-             'mandatory' => false,
+             'mandatory' => true,
              'noteditable' => false,
              'index' => false,
              'locked' => false,
@@ -113,7 +113,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'name' => 'party',
              'title' => 'Party',
              'tooltip' => '',
-             'mandatory' => false,
+             'mandatory' => true,
              'noteditable' => false,
              'index' => false,
              'locked' => false,
@@ -193,71 +193,6 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'enableGridLocking' => false,
    'deletedDataComponents' => 
   array (
-    0 => 
-    \Pimcore\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
-       'name' => 'localizedfields',
-       'title' => '',
-       'tooltip' => NULL,
-       'mandatory' => false,
-       'noteditable' => false,
-       'index' => false,
-       'locked' => false,
-       'style' => NULL,
-       'permissions' => NULL,
-       'fieldtype' => '',
-       'relationType' => false,
-       'invisible' => false,
-       'visibleGridView' => true,
-       'visibleSearch' => true,
-       'blockedVarsForExport' => 
-      array (
-      ),
-       'children' => 
-      array (
-        0 => 
-        \Pimcore\Model\DataObject\ClassDefinition\Data\Wysiwyg::__set_state(array(
-           'name' => 'text',
-           'title' => 'Text',
-           'tooltip' => '',
-           'mandatory' => false,
-           'noteditable' => false,
-           'index' => false,
-           'locked' => false,
-           'style' => '',
-           'permissions' => NULL,
-           'fieldtype' => '',
-           'relationType' => false,
-           'invisible' => false,
-           'visibleGridView' => false,
-           'visibleSearch' => false,
-           'blockedVarsForExport' => 
-          array (
-          ),
-           'toolbarConfig' => '',
-           'excludeFromSearchIndex' => false,
-           'maxCharacters' => '',
-           'height' => '',
-           'width' => '',
-        )),
-      ),
-       'region' => NULL,
-       'layout' => NULL,
-       'maxTabs' => NULL,
-       'border' => false,
-       'provideSplitView' => false,
-       'tabPosition' => 'top',
-       'hideLabelsWhenTabsReached' => NULL,
-       'referencedFields' => 
-      array (
-      ),
-       'permissionView' => NULL,
-       'permissionEdit' => NULL,
-       'labelWidth' => 100,
-       'labelAlign' => 'left',
-       'width' => '',
-       'height' => '',
-       'fieldDefinitionsCache' => NULL,
-    )),
   ),
    'blockedVarsForExport' => 
   array (

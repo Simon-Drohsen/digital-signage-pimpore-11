@@ -17,7 +17,7 @@
 {% set startIndex = 0 %}
 {% set batchSize = 10 %}
 {% set slides = employees|length / 10 %}
-{% if slides < 1 %}
+{% if slides <= 1 %}
     {% set slides = slides|round(0, 'ceil') %}
 {% else %}
     {% set slides = slides|round(0, 'ceil') - 1 %}

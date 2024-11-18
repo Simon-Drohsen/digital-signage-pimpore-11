@@ -23,7 +23,9 @@
         {% endblock %}
 
         <link rel="icon" href="{{ asset('build/images/favicon/wvision_favicon.png') }}" type="image/x-icon">
-        <meta http-equiv="refresh" content="{% block redirects %}{% endblock %}">
+        {% if not editmode %}
+            <meta http-equiv="refresh" content="{% block redirects %}{% endblock %}">
+        {% endif %}
         <meta name="msapplication-TileColor" content="#da532c">
         <meta name="theme-color" content="#ffffff">
     </head>
