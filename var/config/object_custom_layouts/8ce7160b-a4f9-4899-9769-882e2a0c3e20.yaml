@@ -1,0 +1,14 @@
+pimcore:
+    objects:
+        custom_layouts:
+            definitions:
+                8ce7160b-a4f9-4899-9769-882e2a0c3e20:
+                    id: 8ce7160b-a4f9-4899-9769-882e2a0c3e20
+                    name: party
+                    description: ''
+                    creationDate: 1731922315
+                    modificationDate: 1731922315
+                    userOwner: 2
+                    classId: event
+                    layoutDefinitions: null
+                    default: 0

@@ -27,7 +27,7 @@ class TeamCongratulation extends AbstractAreabrick {
         foreach ($employees as $employee) {
             $birthday = Carbon::parse($employee->getBirthday())->setYear(Carbon::now()->year)->startOfDay();
 
-            if ($days >= $now->diffInDays($birthday) && $now->dayOfYear() <= $birthday->dayOfYear()) {
+            if ($days >= (int) $now->diffInDays($birthday) && $now->dayOfYear() <= $birthday->dayOfYear()) {
                 $nextBirthday = $employee;
                 break;
             }

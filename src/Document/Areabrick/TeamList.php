@@ -66,19 +66,19 @@ class TeamList extends AbstractAreabrick {
         foreach ($employees as $employee) {
             $birthday = Carbon::parse($employee->getBirthday())->setYear($now->year)->startOfDay();
 
-            if ($days >= $now->diffInDays($birthday) && $now->dayOfYear <= $birthday->dayOfYear) {
+            if ($days >= (int) $now->diffInDays($birthday) && $now->dayOfYear <= $birthday->dayOfYear) {
                 $birthdayThisYear = true;
                 $nextBirthdays[] = $employee;
-                $days = $now->diffInDays($birthday);
+                $days = (int) $now->diffInDays($birthday);
             }
         }
         if($birthdayThisYear === false) {
             foreach($employees as $employee) {
                 $birthday = Carbon::parse($employee->getBirthday())->setYear($now->year + 1)->startOfDay();
 
-                if ($days >= $now->diffInDays($birthday)) {
+                if ($days >= (int) $now->diffInDays($birthday)) {
                     $nextBirthdays[] = $employee;
-                    $days = $now->diffInDays($birthday);
+                    $days = (int) $now->diffInDays($birthday);
                 }
             }
         }

@@ -5,22 +5,21 @@
  * Variants: no
  *
  * Fields Summary:
- * - title [input]
- * - date [datetime]
- * - holiday [booleanSelect]
- * - countdown [booleanSelect]
- * - image [image]
+ * - name [input]
+ * - receiver [input]
+ * - sender [input]
+ * - subject [input]
  * - party [select]
  */
 
 return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'dao' => NULL,
-   'id' => 'event',
-   'name' => 'Event',
+   'id' => 'birthdayReminder',
+   'name' => 'BirthdayReminder',
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1731927415,
+   'modificationDate' => 1732012092,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -65,8 +64,8 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
         array (
           0 => 
           \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
-             'name' => 'title',
-             'title' => 'Title',
+             'name' => 'name',
+             'title' => 'Name',
              'tooltip' => '',
              'mandatory' => true,
              'noteditable' => false,
@@ -94,9 +93,9 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'defaultValueGenerator' => '',
           )),
           1 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Datetime::__set_state(array(
-             'name' => 'date',
-             'title' => 'Date',
+          \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+             'name' => 'receiver',
+             'title' => 'Receiver',
              'tooltip' => '',
              'mandatory' => true,
              'noteditable' => false,
@@ -113,17 +112,22 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
             array (
             ),
              'defaultValue' => NULL,
-             'useCurrentDate' => false,
-             'respectTimezone' => true,
-             'columnType' => 'datetime',
+             'columnLength' => 190,
+             'regex' => '',
+             'regexFlags' => 
+            array (
+            ),
+             'unique' => false,
+             'showCharCount' => false,
+             'width' => '',
              'defaultValueGenerator' => '',
           )),
           2 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\BooleanSelect::__set_state(array(
-             'name' => 'holiday',
-             'title' => 'Holiday',
+          \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+             'name' => 'sender',
+             'title' => 'Sender',
              'tooltip' => '',
-             'mandatory' => false,
+             'mandatory' => true,
              'noteditable' => false,
              'index' => false,
              'locked' => false,
@@ -137,35 +141,23 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'blockedVarsForExport' => 
             array (
             ),
-             'yesLabel' => 'yes',
-             'noLabel' => 'no',
-             'emptyLabel' => 'empty',
-             'options' => 
+             'defaultValue' => NULL,
+             'columnLength' => 190,
+             'regex' => '',
+             'regexFlags' => 
             array (
-              0 => 
-              array (
-                'key' => 'empty',
-                'value' => 0,
-              ),
-              1 => 
-              array (
-                'key' => 'yes',
-                'value' => 1,
-              ),
-              2 => 
-              array (
-                'key' => 'no',
-                'value' => -1,
-              ),
             ),
+             'unique' => false,
+             'showCharCount' => false,
              'width' => '',
+             'defaultValueGenerator' => '',
           )),
           3 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\BooleanSelect::__set_state(array(
-             'name' => 'countdown',
-             'title' => 'Countdown',
+          \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+             'name' => 'subject',
+             'title' => 'Subject',
              'tooltip' => '',
-             'mandatory' => false,
+             'mandatory' => true,
              'noteditable' => false,
              'index' => false,
              'locked' => false,
@@ -179,53 +171,18 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'blockedVarsForExport' => 
             array (
             ),
-             'yesLabel' => 'yes',
-             'noLabel' => 'no',
-             'emptyLabel' => 'empty',
-             'options' => 
+             'defaultValue' => NULL,
+             'columnLength' => 190,
+             'regex' => '',
+             'regexFlags' => 
             array (
-              0 => 
-              array (
-                'key' => 'empty',
-                'value' => 0,
-              ),
-              1 => 
-              array (
-                'key' => 'yes',
-                'value' => 1,
-              ),
-              2 => 
-              array (
-                'key' => 'no',
-                'value' => -1,
-              ),
             ),
+             'unique' => false,
+             'showCharCount' => false,
              'width' => '',
+             'defaultValueGenerator' => '',
           )),
           4 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Image::__set_state(array(
-             'name' => 'image',
-             'title' => 'Image',
-             'tooltip' => '',
-             'mandatory' => false,
-             'noteditable' => false,
-             'index' => false,
-             'locked' => false,
-             'style' => '',
-             'permissions' => NULL,
-             'fieldtype' => '',
-             'relationType' => false,
-             'invisible' => false,
-             'visibleGridView' => false,
-             'visibleSearch' => false,
-             'blockedVarsForExport' => 
-            array (
-            ),
-             'uploadPath' => '',
-             'width' => '',
-             'height' => '',
-          )),
-          5 => 
           \Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
              'name' => 'party',
              'title' => 'Party',
@@ -310,31 +267,6 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'enableGridLocking' => false,
    'deletedDataComponents' => 
   array (
-    0 => 
-    \Pimcore\Model\DataObject\ClassDefinition\Data\Wysiwyg::__set_state(array(
-       'name' => 'description',
-       'title' => 'Description',
-       'tooltip' => '',
-       'mandatory' => false,
-       'noteditable' => false,
-       'index' => false,
-       'locked' => false,
-       'style' => '',
-       'permissions' => NULL,
-       'fieldtype' => '',
-       'relationType' => false,
-       'invisible' => false,
-       'visibleGridView' => false,
-       'visibleSearch' => false,
-       'blockedVarsForExport' => 
-      array (
-      ),
-       'toolbarConfig' => '',
-       'excludeFromSearchIndex' => false,
-       'maxCharacters' => '',
-       'height' => '',
-       'width' => '',
-    )),
   ),
    'blockedVarsForExport' => 
   array (
