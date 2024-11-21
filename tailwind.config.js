@@ -7,7 +7,7 @@ module.exports = {
     content: [
         "./templates/**/*.html.twig",
         "./assets/images/**/*.svg",
-        // "./themes/**/*.html.twig",
+        "./themes/**/*.html.twig",
         "./assets/js/**/*.js",
         "star': 'url(./assets/images/illustrations/star.svg)",
     ],

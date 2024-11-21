@@ -1,0 +1,12 @@
+{
+  "name": "theme/instride",
+  "title": "instride theme",
+  "authors": [
+    {
+      "name": "Simon Drohsen",
+      "email": "simon.drohsen@instride.ch",
+      "homepage": "https://instride.ch",
+      "role": "Developer"
+    }
+  ]
+}

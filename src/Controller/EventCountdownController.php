@@ -69,8 +69,6 @@ class EventCountdownController extends FrontendController
                 $countdownEvent = $event;
                 $eventDate = Carbon::parse($countdownEvent->getDate()->format('Y-m-d H:i:s'))->addHour();
                 $countdownEvent->setDate($eventDate);
-                $dateNow = Carbon::now()->addHour();
-                $interval = $dateNow->diff($eventDate);
                 break;
             }
         }

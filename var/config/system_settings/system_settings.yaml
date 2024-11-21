@@ -15,7 +15,7 @@ pimcore:
             - de
             - fr
         default_language: en
-        debug_admin_translations: true
+        debug_admin_translations: false
     documents:
         versions:
             days: null

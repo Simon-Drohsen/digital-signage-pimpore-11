@@ -1,4 +1,5 @@
 const Encore = require('@symfony/webpack-encore');
+const path = require('path');
 
 Encore
     .setOutputPath('public/build/')
@@ -14,6 +15,9 @@ Encore
     }, {
         useBuiltIns: 'usage',
         corejs: 3,
+    })
+    .configureDevServerOptions((options) => {
+        options.allowedHosts = 'all';
     })
     .configureBabelPresetEnv((config) => {
         config.useBuiltIns = 'usage';

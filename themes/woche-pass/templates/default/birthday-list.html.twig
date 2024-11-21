@@ -24,15 +24,15 @@
 {% endif %}
 {% set wait = slides * 15 %}
 
-{% block redirects %}
-    {% if nextBirthdays|length == 0 %}
-        {{ wait }};url={{ document.getProperty('event_list_navigation') }}
-    {% elseif nextBirthdays|first.birthday|date('m/d') == "now"|date('m/d') %}
-        {{ wait }};url={{ document.getProperty('birthday_congratulation_navigation') }}
-    {% else %}
-        {{ wait }};url={{ document.getProperty('event_list_navigation') }}
-    {% endif %}
-{% endblock %}
+{#{% block redirects %}#}
+{#    {% if nextBirthdays|length == 0 %}#}
+{#        {{ wait }};url={{ document.getProperty('event_list_navigation') }}#}
+{#    {% elseif nextBirthdays|first.birthday|date('m/d') == "now"|date('m/d') %}#}
+{#        {{ wait }};url={{ document.getProperty('birthday_congratulation_navigation') }}#}
+{#    {% else %}#}
+{#        {{ wait }};url={{ document.getProperty('event_list_navigation') }}#}
+{#    {% endif %}#}
+{#{% endblock %}#}
 
 {% block body %}
     <header class="pt-4 laptop:pt-6 display:pt-10">
@@ -79,7 +79,7 @@
                                     {% endfor %}
 
                                     {% if employee.nickname %}
-                                        <twig:Birthdays:Content:TableLine name="{{ employee.nickname }}"
+                                        <twig:Birthdays:Content:TableLine name="{{ employee.nickname }}" class="text-midnight-500"
                                             date="{{ employee.birthday|format_datetime(pattern: 'd. MMMM', locale: 'de') }}"
                                             year="{{ employee.birthday|date('Y') }}"
                                             round="{{ round }}"

@@ -1,0 +1,15 @@
+pimcore:
+    properties:
+        predefined:
+            definitions:
+                714d294c-1c02-4e5f-ad27-7d8a41837f4b:
+                    name: theme
+                    description: 'chooses theme'
+                    key: theme
+                    type: text
+                    data: ''
+                    config: ''
+                    ctype: document
+                    inheritable: false
+                    creationDate: 1732203305
+                    modificationDate: 1732203333
