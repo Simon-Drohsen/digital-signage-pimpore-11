@@ -1,0 +1,14 @@
+pimcore_static_routes:
+    definitions:
+        680a9c85-a24b-4eb6-8939-7d98b10f80f6:
+            name: 'event list'
+            pattern: /\/event-list
+            reverse: /event-list
+            controller: 'App\Controller\DefaultController::eventListAction'
+            variables: ''
+            defaults: ''
+            siteId: {  }
+            methods: {  }
+            priority: 1
+            creationDate: 1732105411
+            modificationDate: 1732105442

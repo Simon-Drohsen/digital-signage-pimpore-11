@@ -1,0 +1,14 @@
+pimcore_static_routes:
+    definitions:
+        1719e53d-84bb-4ed6-b7e6-ba76d50a6f14:
+            name: fact
+            pattern: /\/fact
+            reverse: /fact
+            controller: 'App\Controller\DefaultController::factAction'
+            variables: ''
+            defaults: ''
+            siteId: {  }
+            methods: {  }
+            priority: 1
+            creationDate: 1732105490
+            modificationDate: 1732105552

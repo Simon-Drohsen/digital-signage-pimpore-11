@@ -1,0 +1,14 @@
+pimcore_static_routes:
+    definitions:
+        949438d8-efeb-4c3c-a17c-10eb73dac1ea:
+            name: 'event countdown'
+            pattern: /\/event-countdown
+            reverse: /event-countdown
+            controller: 'App\Controller\DefaultController::eventCountdownAction'
+            variables: ''
+            defaults: ''
+            siteId: {  }
+            methods: {  }
+            priority: 1
+            creationDate: 1732105447
+            modificationDate: 1732105528

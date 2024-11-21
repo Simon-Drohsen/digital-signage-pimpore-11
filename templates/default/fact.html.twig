@@ -2,9 +2,9 @@
 
 {% block redirects %}
     {% if empty %}
-        0;url={{ document.getProperty('birthday_list_navigation') }}?party={{ party }}
+        0;url={{ document.getProperty('birthday_list_navigation') }}
     {% else %}
-        {{ document.getProperty('redirect_timeout') }};url={{ document.getProperty('birthday_list_navigation') }}?party={{ party }}
+        {{ document.getProperty('redirect_timeout') }};url={{ document.getProperty('birthday_list_navigation') }}
     {% endif %}
 {% endblock %}
 
@@ -13,7 +13,7 @@
 {% block title %}Facts!{% endblock %}
 
 {% block body %}
-    {% if empty %}
+    {% if fact is null %}
         <div class="text-center mt-10">
             <p class="text-white">Es gibt keine Fakten :(</p>
         </div>

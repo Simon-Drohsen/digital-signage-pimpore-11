@@ -10,7 +10,7 @@
  * - holiday [booleanSelect]
  * - countdown [booleanSelect]
  * - image [image]
- * - party [select]
+ * - party [multiselect]
  */
 
 return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
@@ -20,7 +20,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1731927415,
+   'modificationDate' => 1732191878,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -226,7 +226,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'height' => '',
           )),
           5 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
+          \Pimcore\Model\DataObject\ClassDefinition\Data\Multiselect::__set_state(array(
              'name' => 'party',
              'title' => 'Party',
              'tooltip' => '',
@@ -244,11 +244,13 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'blockedVarsForExport' => 
             array (
             ),
-             'defaultValue' => NULL,
-             'columnLength' => 190,
+             'maxItems' => NULL,
+             'renderType' => 'list',
              'dynamicOptions' => true,
-             'defaultValueGenerator' => '',
+             'defaultValue' => NULL,
+             'height' => '',
              'width' => '',
+             'defaultValueGenerator' => '',
              'optionsProviderType' => 'class',
              'optionsProviderClass' => 'App\\Website\\OptionsProvider\\PartyOptionsProvider',
              'optionsProviderData' => '',
@@ -310,31 +312,6 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'enableGridLocking' => false,
    'deletedDataComponents' => 
   array (
-    0 => 
-    \Pimcore\Model\DataObject\ClassDefinition\Data\Wysiwyg::__set_state(array(
-       'name' => 'description',
-       'title' => 'Description',
-       'tooltip' => '',
-       'mandatory' => false,
-       'noteditable' => false,
-       'index' => false,
-       'locked' => false,
-       'style' => '',
-       'permissions' => NULL,
-       'fieldtype' => '',
-       'relationType' => false,
-       'invisible' => false,
-       'visibleGridView' => false,
-       'visibleSearch' => false,
-       'blockedVarsForExport' => 
-      array (
-      ),
-       'toolbarConfig' => '',
-       'excludeFromSearchIndex' => false,
-       'maxCharacters' => '',
-       'height' => '',
-       'width' => '',
-    )),
   ),
    'blockedVarsForExport' => 
   array (

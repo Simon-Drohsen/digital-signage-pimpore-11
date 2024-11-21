@@ -26,11 +26,11 @@
 
 {% block redirects %}
     {% if nextBirthdays|length == 0 %}
-        {{ wait }};url={{ document.getProperty('event_list_navigation') }}?party={{ party }}
+        {{ wait }};url={{ document.getProperty('event_list_navigation') }}
     {% elseif nextBirthdays|first.birthday|date('m/d') == "now"|date('m/d') %}
-        {{ wait }};url={{ document.getProperty('birthday_congratulation_navigation') }}?party={{ party }}
+        {{ wait }};url={{ document.getProperty('birthday_congratulation_navigation') }}
     {% else %}
-        {{ wait }};url={{ document.getProperty('event_list_navigation') }}?party={{ party }}
+        {{ wait }};url={{ document.getProperty('event_list_navigation') }}
     {% endif %}
 {% endblock %}
 
