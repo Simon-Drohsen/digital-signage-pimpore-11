@@ -38,6 +38,6 @@ final class ThemeRequestListener
 
         $theme = $event->getRequest()->attributes->get('routeDocument')->getDocument()->getProperties()['theme']->getData();
 
-        $this->themeContext->setTheme($this->themeRepository->findOneByName('theme/'. $theme));
+        if ($this->themeRepository->findOneByName('theme/'. $theme)) $this->themeContext->setTheme($this->themeRepository->findOneByName('theme/'. $theme));
     }
 }
