@@ -10,7 +10,7 @@ use Pimcore\Model\DataObject\Employee;
 
 class BirthdayCongratulationController extends FrontendController
 {
-    public function action(Request $request): Response
+    public function action(): Response
     {
         $days = 366;
         $nextBirthday = null;
