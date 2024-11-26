@@ -13,25 +13,14 @@ class BirthdayListController extends FrontendController
 {
     public function action(Request $request): Response
     {
+        $partyName = $request->attributes->get('routeDocument')->getDocument()->getProperties()['theme']->getData();
         $days = 366;
         $parties = new Party\Listing();
         $employees = new Employee\Listing();
         $partyId = null;
 
-        if ($this->editmode) {
-            return $this->render('default/birthday-list.html.twig',
-                [
-                    'employees' => $employees,
-                    'nextBirthdays' => $this->getNextBirthdays($employees->getObjects()),
-                    'days' => $days,
-                ]
-            );
-        }
-
-        $party = explode('/', $request->attributes->getString('_site_path'))[1];
-
         foreach($parties as $oneParty) {
-            if($oneParty->getParty() === $party) {
+            if($oneParty->getParty() === $partyName) {
                 $partyId = $oneParty->getId();
             }
         }
@@ -81,12 +70,20 @@ class BirthdayListController extends FrontendController
     function sortEmployeesByBirthday(Employee\Listing $employees): array
     {
         $employees = $employees->getObjects();
+        $now = Carbon::now();
 
-        usort($employees, function ($a, $b) {
-            $dayOfYearA = Carbon::parse($a->getBirthday())->dayOfYear;
-            $dayOfYearB = Carbon::parse($b->getBirthday())->dayOfYear;
+        usort($employees, function ($a, $b) use ($now) {
+            $birthdayA = Carbon::parse($a->getBirthday())->setYear($now->year);
+            $birthdayB = Carbon::parse($b->getBirthday())->setYear($now->year);
 
-            return $dayOfYearA <=> $dayOfYearB;
+            if ($birthdayA->lt($now)) {
+                $birthdayA->addYear();
+            }
+            if ($birthdayB->lt($now)) {
+                $birthdayB->addYear();
+            }
+
+            return $birthdayA->dayOfYear <=> $birthdayB->dayOfYear;
         });
 
         return $employees;

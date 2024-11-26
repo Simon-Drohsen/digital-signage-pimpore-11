@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html {% block html_class %}{% endblock %}>
+<html {% block html_class %}{% endblock %} lang="de">
     <head>
         {% block metadata %}
             {%- if pimcore_website_config('name') is not empty -%}
@@ -7,7 +7,6 @@
                 {%- do pimcore_head_title().setSeparator(' – ') -%}
             {%- endif -%}
 
-            {{ pimcore_head_title() -}}
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <meta name="view-transition" content="same-origin">
@@ -28,6 +27,7 @@
         {% endif %}
         <meta name="msapplication-TileColor" content="#da532c">
         <meta name="theme-color" content="#ffffff">
+        <title>{{ pimcore_head_title() -}}</title>
     </head>
     <body class="bg-midnight {% block body_class %}{% endblock %}">
         {% block body %}{% endblock %}

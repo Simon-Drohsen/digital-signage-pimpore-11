@@ -2,7 +2,7 @@
 
 {% block title %}Geburtstagsliste{% endblock %}
 
-{#{% block html_class %}class="cursor-none"{% endblock %}#}
+{% block html_class %}class="cursor-none"{% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
@@ -24,25 +24,25 @@
 {% endif %}
 {% set wait = slides * 15 %}
 
-{#{% block redirects %}#}
-{#    {% if nextBirthdays|length == 0 %}#}
-{#        {{ wait }};url={{ document.getProperty('event_list_navigation') }}#}
-{#    {% elseif nextBirthdays|first.birthday|date('m/d') == "now"|date('m/d') %}#}
-{#        {{ wait }};url={{ document.getProperty('birthday_congratulation_navigation') }}#}
-{#    {% else %}#}
-{#        {{ wait }};url={{ document.getProperty('event_list_navigation') }}#}
-{#    {% endif %}#}
-{#{% endblock %}#}
+{% block redirects %}
+    {% if nextBirthdays|length == 0 %}
+        {{ wait }};url={{ document.getProperty('event_list_navigation') }}
+    {% elseif nextBirthdays|first.birthday|date('m/d') == "now"|date('m/d') %}
+        {{ wait }};url={{ document.getProperty('birthday_congratulation_navigation') }}
+    {% else %}
+        {{ wait }};url={{ document.getProperty('event_list_navigation') }}
+    {% endif %}
+{% endblock %}
 
 {% block body %}
     <header class="pt-4 laptop:pt-6 display:pt-10">
         <twig:Birthdays:Container>
-            <h1 class="drop-shadow text-white">Geburtstagsliste</h1>
+            <h1 class="drop-shadow text-[#E9EBE8]">Geburtstagsliste</h1>
         </twig:Birthdays:Container>
     </header>
 
     {% if employees|length == 0 %}
-        <div class="text-white text-center mt-4">Es gibt keine Geburtstage :(</div>
+        <div class="text-[#E9EBE8] text-center mt-4">Es gibt keine Geburtstage :(</div>
     {% else %}
         <main class="mt-4 display:mt-6">
             <twig:Birthdays:Container>
@@ -79,7 +79,7 @@
                                     {% endfor %}
 
                                     {% if employee.nickname %}
-                                        <twig:Birthdays:Content:TableLine name="{{ employee.nickname }}" class="text-midnight-500"
+                                        <twig:Birthdays:Content:TableLine name="{{ employee.nickname }}"
                                             date="{{ employee.birthday|format_datetime(pattern: 'd. MMMM', locale: 'de') }}"
                                             year="{{ employee.birthday|date('Y') }}"
                                             round="{{ round }}"
@@ -106,7 +106,7 @@
         </main>
 
         <div class="absolute right-2 bottom-5">
-            <div class="text-mustard border-2 p-2 mr-20 max-w-3xl">
+            <div class="text-[#E3F509] border-2 p-2 mr-20 max-w-3xl">
                 <p class="text-2xl font-light">
                     <span class="font-black">Achtung:</span>
                     <span>

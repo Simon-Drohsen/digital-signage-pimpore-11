@@ -1,0 +1,11 @@
+{% props soon = false, round = false, name = '', year = '', date = '' %}
+
+<div class="grid grid-cols-[1fr_1fr_fit-content(5%)] gap-x-1 {% if round and not soon %}text-[#FF6C64] {% elseif soon %}text-[#E3F509]{% endif %}">
+    <div class="flex gap-x-2">
+        <img src="{{ asset('build/images/fireworks.svg') }}" class="w-5 inline {% if round %}block{% else %}hidden{% endif %}" style="filter: brightness(0) saturate(100%) invert(57%) sepia(14%) saturate(3576%) hue-rotate(319deg) brightness(100%) contrast(102%)">
+        <img src="{{ asset('build/images/annoucement.svg') }}" class="w-5 inline {% if soon %}block{% else %}hidden{% endif %}" style="filter: brightness(0) saturate(100%) invert(81%) sepia(98%) saturate(465%) hue-rotate(5deg) brightness(98%) contrast(96%)">
+        <p>{{ name }}</p>
+    </div>
+    <p>{{ date }}</p>
+    <p>{{ year }}</p>
+</div>

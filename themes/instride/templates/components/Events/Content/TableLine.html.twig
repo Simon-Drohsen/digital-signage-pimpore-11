@@ -1,0 +1,5 @@
+<div class="grid grid-flow-col {{ holiday ? 'text-[#E3F509]' : 'text-[#E9EBE8]' }}">
+    <div><img src="{{ asset('build/images/star.svg') }}" class="w-5 inline {{ holiday ? 'block' : 'hidden' }}" style="filter: brightness(0) saturate(100%) invert(81%) sepia(98%) saturate(465%) hue-rotate(5deg) brightness(98%) contrast(96%)">
+    <p class="inline align-middle">{{ event }}</p></div>
+    <p class="text-right">{{ date }}</p>
+</div>

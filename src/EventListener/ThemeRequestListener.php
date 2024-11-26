@@ -32,12 +32,12 @@ final class ThemeRequestListener
             return;
         }
 
-        $sitePath = explode('/', $event->getRequest()->attributes->get('_site_path'));
-
-        if (count($sitePath) > 1) {
-            $this->themeContext->setTheme(
-                $this->themeRepository->findOneByName('theme/'. $sitePath[1])
-            );
+        if(!$event->getRequest()->attributes->has('routeDocument')) {
+            return;
         }
+
+        $theme = $event->getRequest()->attributes->get('routeDocument')->getDocument()->getProperties()['theme']->getData();
+
+        $this->themeContext->setTheme($this->themeRepository->findOneByName('theme/'. $theme));
     }
 }

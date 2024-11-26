@@ -14,32 +14,20 @@ class EventCountdownController extends FrontendController
 {
     public function action(Request $request): Response
     {
+        $partyName = $request->attributes->get('routeDocument')->getDocument()->getProperties()['theme']->getData();
         $events = new Event\Listing();
         $parties = new Party\Listing();
         $partyId = null;
         $facts = new Fact\Listing();
         $fact = false;
-        $countdownEvent = null;
-        $interval = null;
 
         if (count($facts) !== 0) {
             $fact = true;
         }
 
-        if ($this->editmode) {
-            return $this->render('default/event-countdown.html.twig',
-                [
-                    'event' => $this->getCountdownEvent($events),
-                    'days' => $this->getInterval($this->getCountdownEvent($events))->days,
-                    'fact' => $fact,
-                ]
-            );
-        }
-
-        $party = explode('/', $request->attributes->getString('_site_path'))[1];
 
         foreach($parties as $oneParty) {
-            if($oneParty->getParty() === $party) {
+            if($oneParty->getParty() === $partyName) {
                 $partyId = $oneParty->getId();
             }
         }

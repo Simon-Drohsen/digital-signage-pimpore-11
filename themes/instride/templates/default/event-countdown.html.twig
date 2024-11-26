@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Events{% endblock %}
+
+{% block html_class %}class="cursor-none"{% endblock %}
+
+{% block redirects %}
+    {% if fact %}
+        {{ document.getProperty('redirect_timeout') }};url={{ document.getProperty('fact_navigation') }}
+    {% else %}
+        {{ document.getProperty('redirect_timeout') }};url={{ document.getProperty('birthday_list_navigation') }}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {% if event is not defined %}
+        <div class="text-center mt-10">
+            <p class="text-[#E9EBE8]">Es gibt kein Event :(</p>
+        </div>
+    {% else %}
+        <header class="pt-4 laptop:pt-6 display:pt-10">
+            <twig:Common:Container>
+                <h1 class="drop-shadow text-[#E9EBE8]">{{ event.title }}</h1>
+            </twig:Common:Container>
+        </header>
+
+        <main class="mt-10">
+            <twig:Common:Container>
+                <div class="grid grid-cols-[2fr_1fr_2fr_1fr_2fr_1fr_2fr]" {{ stimulus_controller('countdown', {'dateTime': event.date|date('Y-m-d H:i:s')}) }}>
+                    {% if days >= 100 %}
+                        <twig:Events:Content:CountdownBox calendar="Monate">
+                            <p {{ stimulus_target('countdown', 'months') }}></p>
+                        </twig:Events:Content:CountdownBox>
+
+                        <twig:Events:Content:TimerDots />
+
+                        <twig:Events:Content:CountdownBox calendar="Tage">
+                            <p {{ stimulus_target('countdown', 'daysWithMonths') }}></p>
+                        </twig:Events:Content:CountdownBox>
+
+                    {% else %}
+                        <twig:Events:Content:CountdownBox calendar="Tage">
+                            <p {{ stimulus_target('countdown', 'days') }}></p>
+                        </twig:Events:Content:CountdownBox>
+                    {% endif %}
+
+                    <twig:Events:Content:TimerDots />
+
+                    <twig:Events:Content:CountdownBox calendar="Stunden">
+                        <p {{ stimulus_target('countdown', 'hours') }}></p>
+                    </twig:Events:Content:CountdownBox>
+
+                    <twig:Events:Content:TimerDots />
+
+                    <twig:Events:Content:CountdownBox calendar="Minuten">
+                        <p {{ stimulus_target('countdown', 'minutes') }}></p>
+                    </twig:Events:Content:CountdownBox>
+
+                    {% if days <= 100 %}
+                        <twig:Events:Content:TimerDots />
+
+                        <twig:Events:Content:CountdownBox calendar="Sekunden">
+                            <p {{ stimulus_target('countdown', 'seconds') }}></p>
+                        </twig:Events:Content:CountdownBox>
+                    {% endif %}
+                </div>
+            </twig:Common:Container>
+            <footer>
+                <twig:Common:Date />
+            </footer>
+        </main>
+    {% endif %}
+{% endblock %}

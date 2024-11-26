@@ -34,7 +34,7 @@ class BirthdayCongratulationController extends FrontendController
             );
         }
 
-        return $this->render('themes/'. $employee .'/birthday-congratulation.html.twig',
+        return $this->render('default/birthday-congratulation.html.twig',
             [
                 'nextBirthday' => $nextBirthday,
             ]

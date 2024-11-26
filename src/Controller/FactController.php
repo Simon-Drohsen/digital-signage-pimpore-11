@@ -12,23 +12,14 @@ class FactController extends FrontendController
 {
     public function action(Request $request): Response
     {
+        $partyName = $request->attributes->get('routeDocument')->getDocument()->getProperties()['theme']->getData();
         $facts = new Fact\Listing();
         $empty = true;
         $parties = new Party\Listing();
         $partyId = null;
 
-        if ($this->editmode) {
-            return $this->render('default/fact.html.twig',
-                [
-                    'fact' => $this->getRandomFact($facts->getObjects()),
-                ]
-            );
-        }
-
-        $party = explode('/', $request->attributes->getString('_site_path'))[1];
-
         foreach($parties as $oneParty) {
-            if($oneParty->getParty() === $party) {
+            if($oneParty->getParty() === $partyName) {
                 $partyId = $oneParty->getId();
             }
         }
