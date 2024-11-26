@@ -1,0 +1,12 @@
+{
+  "name": "theme/woche-pass",
+  "title": "woche-pass theme",
+  "authors": [
+    {
+      "name": "Simon Drohsen",
+      "email": "simon.drohsen@instride.ch",
+      "homepage": "https://instride.ch",
+      "role": "Developer"
+    }
+  ]
+}

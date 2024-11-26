@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gratulation{% endblock %}
+
+{% block html_class %}class="cursor-none"{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+{% endblock %}
+
+{% block redirects %}{{ document.getProperty('redirect_timeout') }};url={{ document.getProperty('event_list_navigation') }}{% endblock %}
+
+{% block body %}
+    {% if nextBirthday is null %}
+        <div class="text-white text-center mt-36">Niemand hat Geburtstag :(</div>
+    {% else %}
+        <main class="bg-no-repeat bg-right-top" style="background-image:url('{{ asset('build/images/garland.svg') }}');">
+            <div class="pt-28 laptop:pt-28 display:pt-36">
+                <div class="px-36 display:px-48 text-[#E9EBE8]">
+                    {% if nextBirthday.nickname %}
+                        <h1 class="text-7xl laptop:text-hero drop-shadow">Happy Birthday {{ nextBirthday.nickname }}!</h1>
+                    {% else %}
+                        <h1 class="text-7xl laptop:text-hero drop-shadow">Happy Birthday {{ nextBirthday.firstname }}!</h1>
+                    {% endif %}
+                    <h2 class="w-2/3 laptop:w-full">Wir wünschen dir alles Gute</h2>
+                </div>
+            </div>
+
+            <div class="absolute right-0 bottom-0">
+                <div class="absolute -top-10 -left-8 animate-balloons">
+                    <img src="{{ asset('build/images/balloons.svg') }}" alt="ballons">
+                </div>
+                {% if nextBirthday.image is not null %}
+                    <div>
+                        {{ nextBirthday.image|pimcore_image_thumbnail_html('nextBirthday--image', {
+                            'disableAutoAlt': false,
+                            'disableAutoCopyright': true,
+                            'disableAutoTitle': true,
+                            'imgAttributes': {'class': 'w-full h-full'}
+                        }) }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="animate-firework absolute top-16 right-36 animation-delay-[1.75s]">
+                <img src="{{ asset('build/images/firework4.svg') }}" alt="fireworks">
+            </div>
+            <div class="animate-firework absolute top-2 display:top-8 left-60 animation-delay-[0.5s]">
+                <img src="{{ asset('build/images/firework4.svg') }}" alt="fireworks">
+            </div>
+            <div class="animate-firework absolute left-5 top-44 animation-delay-[2.5s]">
+                <img src="{{ asset('build/images/firework4.svg') }}" alt="fireworks">
+            </div>
+        </main>
+    {% endif %}
+{% endblock %}

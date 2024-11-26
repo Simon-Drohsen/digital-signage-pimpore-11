@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Events{% endblock %}
+
+{% block html_class %}class="cursor-none"{% endblock %}
+
+{% block redirects %}
+    {% if events|length == 0 %}
+        0;url={{ document.getProperty('fact_navigation') }}
+    {% else %}
+        {{ document.getProperty('redirect_timeout') }};url={{ document.getProperty('event_countdown_navigation') }}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <header class="pt-4 laptop:pt-6 display:pt-10">
+        <twig:Common:Container>`
+            <h1 class="drop-shadow text-white">Events</h1>
+        </twig:Common:Container>
+    </header>
+
+    {% if events|length == 0 %}
+        <div class="text-center mt-10">
+            <p class="text-white">Es gibt keine Events :(</p>
+        </div>
+    {% else %}
+        <main class="mt-3 display:mt-6">
+            <twig:Common:Container>
+                <div class="grid grid-cols-[0.8fr_1fr] gap-x-32">
+                    <div class="space-y-2">
+                        {% for event in events|slice(-10) %}
+                            <twig:Events:Content:TableLine event="{{ event.title }}" date="{{ event.date|format_datetime(pattern: 'd. MMMM Y', locale: 'de') }}" holiday="{{ event.holiday }}" />
+                        {% endfor %}
+                    </div>
+                    {% if nextEvent.image is null %}
+                        <div class="relative bg-cover bg-center min-w-[836px] min-h-[535px]" style="background-image:url('{{ asset('build/images/team.png') }}')">
+                            <div class="laptop:block w-36 h-36 rounded-full bg-[#999] absolute -bottom-16 -right-16">
+                                <img src="{{ asset('build/images/calendar.svg') }}" width="100" class="ml-8 mt-8" alt="">
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="relative bg-cover bg-center min-w-[836px] min-h-[535px]">
+                            {{ nextEvent.image|pimcore_image_thumbnail_html('nextEvent--image', {
+                                'disableAutoAlt': false,
+                                'disableAutoCopyright': true,
+                                'disableAutoTitle': true,
+                                'imgAttributes': {'class': 'w-full h-full'}
+                            }) }}
+                            <div class="laptop:block w-36 h-36 rounded-full bg-[#999] absolute -bottom-16 -right-16">
+                                <img src="{{ asset('build/images/calendar.svg') }}" width="100" class="ml-8 mt-8" alt="">
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </twig:Common:Container>
+            <footer>
+                <twig:Common:Date />
+            </footer>
+        </main>
+    {% endif %}
+{% endblock %}
