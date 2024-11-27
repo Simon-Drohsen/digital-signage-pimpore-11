@@ -1,14 +1,15 @@
 pimcore_static_routes:
     definitions:
         4c776377-bc04-4a83-a2a5-16107a895e5a:
-            name: 'birthday congratulation'
-            pattern: /\/birthday-congratulation
-            reverse: /birthday-congratulation
-            controller: 'App\Controller\DefaultController::birthdayCongratulationAction'
+            name: birthday_congratulation
+            pattern: /birthday-congratulation/
+            reverse: ''
+            controller: 'App\Controller\BirthdayCongratulationController::action'
             variables: ''
             defaults: ''
             siteId: {  }
-            methods: {  }
+            methods:
+                - GET
             priority: 1
             creationDate: 1732105291
-            modificationDate: 1732105404
+            modificationDate: 1732723150

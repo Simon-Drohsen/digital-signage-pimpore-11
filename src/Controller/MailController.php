@@ -4,70 +4,111 @@ namespace App\Controller;
 
 use Carbon\Carbon;
 use Carbon\CarbonTimeZone;
+use Exception;
 use Pimcore\Model\DataObject\Employee;
 use Pimcore\Model\DataObject\BirthdayReminder;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Helper\EmailHelper;
 use Pimcore\Controller\FrontendController;
 use Pimcore\Mail as PimcoreMail;
-use Pimcore\Tool;
 
 class MailController extends FrontendController
 {
-    const FIRST_REMINDER = 14;
-    const SECOND_REMINDER = 7;
+    const int FIRST_REMINDER = 14;
+    const int SECOND_REMINDER = 7;
 
-    public function birthdayReminderAction(): PimcoreMail|Response
+    /**
+     * @throws Exception
+     */
+    public function birthdayReminderAction(): PimcoreMail|Response|null
     {
+        $today = $this->getToday();
         $employees = new Employee\Listing();
-        $employee = null;
         $mails = new BirthdayReminder\Listing();
-        $days = 0;
-        $tz = new CarbonTimeZone('Europe/Zurich');
-        $today = new Carbon();
-        $today->setTimezone($tz);
-        $today = $today->dayOfYear() - 1;
-        foreach($employees as $oneEmployee) {
-            $birthday = $oneEmployee->getBirthday();
-            $birthday = $birthday->dayOfYear();
-            if ($today === $birthday - self::FIRST_REMINDER || $today === $birthday - self::SECOND_REMINDER) {
-                $employee = $oneEmployee;
-                $mailInfos = null;
-                foreach ($mails as $oneMail) {
-                    if ($oneMail->getParty() === $oneEmployee->getParty()) {
-                        $mailInfos = $oneMail;
-                        break;
-                    }
-                }
 
-                $days = $birthday - $today;
+        $mail = $this->findBirthdayReminderMail($employees, $mails, $today);
 
-                $mail = new PimcoreMail();
-                $mail->setDocument('/mails/birthday-reminder');
-                $mail->to($mailInfos->getReceiver());
-                $mail->subject('Birthday Reminder');
-                $mail->setIgnoreDebugMode(true);
-                $mail->setParams([
-                    'mail' => $mailInfos,
-                    'employee' => $employee,
-                    'days' => $days
-                ]);
-                break;
-            }
-        }
         if (!$mail) {
-            return new Response('No birthday reminder mails to send');
+            return null;
         }
 
         if ($this->container !== null) {
             return $this->render('mails/template.html.twig', [
-                'mail' => $mail,
-                'employee' => $employee,
-                'days' => $days
+                'mail' => $mail['mail'],
+                'employee' => $mail['employee'],
+                'days' => $mail['days'],
             ]);
         }
 
+        return $mail['mail'];
+    }
+
+    private function getToday(): int
+    {
+        $tz = new CarbonTimeZone('Europe/Zurich');
+        $today = Carbon::now($tz);
+        return $today->dayOfYear() - 1;
+    }
+
+    private function isReminderDue(int $today, int $birthday): bool
+    {
+        return $today === $birthday - self::FIRST_REMINDER || $today === $birthday - self::SECOND_REMINDER;
+    }
+
+    private function findMailInfo(BirthdayReminder\Listing $mails, Employee $employee): ?BirthdayReminder
+    {
+        foreach ($mails as $oneMail) {
+            if ($oneMail->getParty() === $employee->getParty()) {
+                return $oneMail;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * @throws Exception
+     */
+    private function createReminderMail(BirthdayReminder $mailInfos, Employee $employee, int $days): PimcoreMail
+    {
+        $mail = new PimcoreMail();
+        $mail->setDocument('/mails/birthday-reminder');
+        $mail->to($mailInfos->getReceiver());
+        $mail->subject('Birthday Reminder');
+        $mail->setIgnoreDebugMode(true);
+        $mail->setParams([
+            'mail' => $mailInfos,
+            'employee' => $employee,
+            'days' => $days,
+        ]);
+
         return $mail;
+    }
+
+    /**
+     * @throws Exception
+     */
+    private function findBirthdayReminderMail(Employee\Listing $employees, BirthdayReminder\Listing $mails, int $today): ?array
+    {
+        foreach ($employees as $oneEmployee) {
+            $birthday = $oneEmployee->getBirthday()?->dayOfYear();
+            if (!$birthday || !$this->isReminderDue($today, $birthday)) {
+                continue;
+            }
+
+            $mailInfos = $this->findMailInfo($mails, $oneEmployee);
+            if (!$mailInfos) {
+                continue;
+            }
+
+            $days = $birthday - $today;
+            $mail = $this->createReminderMail($mailInfos, $oneEmployee, $days);
+
+            return [
+                'mail' => $mail,
+                'employee' => $oneEmployee,
+                'days' => $days,
+            ];
+        }
+
+        return null;
     }
 }

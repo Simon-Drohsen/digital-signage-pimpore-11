@@ -43,7 +43,7 @@ services:
 
     php:
         #user: '1000:1000' # set to your uid:gid
-        image: pimcore/pimcore:php8.3-debug-latest
+        build: .docker/PHP8.3-debug-latest
         environment:
             COMPOSER_HOME: /var/www/html
             PHP_IDE_CONFIG: serverName=localhost
@@ -58,8 +58,9 @@ services:
             db:
                 condition: service_healthy
         volumes:
-            - .:/var/www/html
+            - .:/var/www/html:cached
             - ./.docker/messenger.yaml:/var/www/html/config/packages/messenger.yaml:ro
+            - .docker/php/php-ini-overrides.ini:/usr/local/etc/php/conf.d/99-overrides.ini
 
     adminer:
         image: "adminer"

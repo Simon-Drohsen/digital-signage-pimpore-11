@@ -6,9 +6,9 @@
 
 {% block redirects %}
     {% if fact %}
-        {{ document.getProperty('redirect_timeout') }};url={{ document.getProperty('fact_navigation') }}
+        {{ timeout }};url={{ url[0]['link'].getData() }}
     {% else %}
-        {{ document.getProperty('redirect_timeout') }};url={{ document.getProperty('birthday_list_navigation') }}
+        {{ timeout }};url={{ url[1]['link'].getData() }}
     {% endif %}
 {% endblock %}
 

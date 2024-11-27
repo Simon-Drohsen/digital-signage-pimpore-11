@@ -6,9 +6,9 @@
 
 {% block redirects %}
     {% if events|length == 0 %}
-        0;url={{ document.getProperty('fact_navigation') }}
+        0;url={{ url[0]['link'].getData() }}
     {% else %}
-        {{ document.getProperty('redirect_timeout') }};url={{ document.getProperty('event_countdown_navigation') }}
+        {{ timeout }};url={{ url[1]['link'].getData() }}
     {% endif %}
 {% endblock %}
 

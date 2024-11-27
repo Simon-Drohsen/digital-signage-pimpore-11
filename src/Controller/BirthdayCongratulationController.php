@@ -4,14 +4,23 @@ namespace App\Controller;
 
 use Carbon\Carbon;
 use Pimcore\Controller\FrontendController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Pimcore\Model\DataObject\Employee;
+use Pimcore\Model\DataObject\Redirect;
 
 class BirthdayCongratulationController extends FrontendController
 {
     public function action(): Response
     {
+        $redirects = new Redirect\Listing();
+        $redirect = null;
+
+        foreach ($redirects as $oneRedirect) {
+            if (lcfirst($oneRedirect->getTitle()) === 'birthday-congratulation') {
+                $redirect = $oneRedirect;
+            }
+        }
+
         $days = 366;
         $nextBirthday = null;
         $employees = $this->sortEmployeesByBirthday(new Employee\Listing());
@@ -26,17 +35,11 @@ class BirthdayCongratulationController extends FrontendController
             }
         }
 
-        if ($this->editmode) {
-            return $this->render('default/birthday-congratulation.html.twig',
-                [
-                    'nextBirthday' => $nextBirthday,
-                ]
-            );
-        }
-
         return $this->render('default/birthday-congratulation.html.twig',
             [
                 'nextBirthday' => $nextBirthday,
+                'url' => $redirect->getTo()[0]['link']->getData(),
+                'timeout' => $redirect->getTimeout(),
             ]
         );
     }

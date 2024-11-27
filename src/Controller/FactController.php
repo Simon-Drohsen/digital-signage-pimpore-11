@@ -7,16 +7,29 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Pimcore\Model\DataObject\Fact;
 use Pimcore\Model\DataObject\Party;
+use Pimcore\Model\DataObject\Redirect;
 
 class FactController extends FrontendController
 {
     public function action(Request $request): Response
     {
-        $partyName = $request->attributes->get('routeDocument')->getDocument()->getProperties()['theme']->getData();
+        $redirects = new Redirect\Listing();
+        $redirect = null;
         $facts = new Fact\Listing();
-        $empty = true;
         $parties = new Party\Listing();
         $partyId = null;
+
+        if($request->attributes->get('contentDocument')->getKey()) {
+            $partyName = $request->attributes->get('contentDocument')->getKey();
+        } else {
+            $partyName = '';
+        }
+
+        foreach ($redirects as $oneRedirect) {
+            if (lcfirst($oneRedirect->getTitle()) === 'fact') {
+                $redirect = $oneRedirect;
+            }
+        }
 
         foreach($parties as $oneParty) {
             if($oneParty->getParty() === $partyName) {
@@ -31,7 +44,8 @@ class FactController extends FrontendController
         return $this->render('default/fact.html.twig',
             [
                 'fact' => $randomFact,
-                'empty' => $empty,
+                'url' => $redirect->getTo()[0]['link']->getData(),
+                'timeout' => $redirect->getTimeout(),
             ]
         );
     }

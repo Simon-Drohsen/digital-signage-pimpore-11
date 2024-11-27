@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 {% endblock %}
 
-{% block redirects %}{{ document.getProperty('redirect_timeout') }};url={{ document.getProperty('event_list_navigation') }}{% endblock %}
+{% block redirects %}{{ timeout }};url={{ url }}{% endblock %}
 
 {% block body %}
     {% if nextBirthday is null %}

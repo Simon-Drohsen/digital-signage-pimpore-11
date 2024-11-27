@@ -7,12 +7,27 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Pimcore\Model\DataObject\Event;
 use Pimcore\Model\DataObject\Party;
+use Pimcore\Model\DataObject\Redirect;
 
 class EventListController extends FrontendController
 {
     public function action(Request $request): ?Response
     {
-        $partyName = $request->attributes->get('routeDocument')->getDocument()->getProperties()['theme']->getData();
+        $redirects = new Redirect\Listing();
+        $redirect = null;
+
+        if($request->attributes->get('contentDocument')->getKey()) {
+            $partyName = $request->attributes->get('contentDocument')->getKey();
+        } else {
+            $partyName = '';
+        }
+
+        foreach ($redirects as $oneRedirect) {
+            if (lcfirst($oneRedirect->getTitle()) === 'event-list') {
+                $redirect = $oneRedirect;
+            }
+        }
+
         $events = new Event\Listing();
         $parties = new Party\Listing();
         $partyId = null;
@@ -33,6 +48,8 @@ class EventListController extends FrontendController
             [
                 'events' => $events,
                 'nextEvent' => $nextEvent,
+                'url' => $redirect->getTo(),
+                'timeout' => $redirect->getTimeout(),
             ]
         );
     }

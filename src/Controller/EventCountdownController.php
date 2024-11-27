@@ -9,12 +9,27 @@ use Symfony\Component\HttpFoundation\Response;
 use Pimcore\Model\DataObject\Event;
 use Pimcore\Model\DataObject\Party;
 use Pimcore\Model\DataObject\Fact;
+use Pimcore\Model\DataObject\Redirect;
 
 class EventCountdownController extends FrontendController
 {
     public function action(Request $request): Response
     {
-        $partyName = $request->attributes->get('routeDocument')->getDocument()->getProperties()['theme']->getData();
+        $redirects = new Redirect\Listing();
+        $redirect = null;
+
+        if($request->attributes->get('contentDocument')->getKey()) {
+            $partyName = $request->attributes->get('contentDocument')->getKey();
+        } else {
+            $partyName = '';
+        }
+
+        foreach ($redirects as $oneRedirect) {
+            if (lcfirst($oneRedirect->getTitle()) === 'event-countdown') {
+                $redirect = $oneRedirect;
+            }
+        }
+
         $events = new Event\Listing();
         $parties = new Party\Listing();
         $partyId = null;
@@ -28,7 +43,8 @@ class EventCountdownController extends FrontendController
 
         foreach($parties as $oneParty) {
             if($oneParty->getParty() === $partyName) {
-                $partyId = $oneParty->getId();
+                $partyId = (int) $oneParty->getId();
+                break;
             }
         }
 
@@ -44,6 +60,8 @@ class EventCountdownController extends FrontendController
                 'event' => $countdownEvent,
                 'days' => $interval->days,
                 'fact' => $fact,
+                'url' => $redirect->getTo(),
+                'timeout' => $redirect->getTimeout(),
             ]
         );
     }

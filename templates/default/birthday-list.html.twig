@@ -25,12 +25,10 @@
 {% set wait = slides * 15 %}
 
 {% block redirects %}
-    {% if nextBirthdays|length == 0 %}
-        {{ wait }};url={{ document.getProperty('event_list_navigation') }}
-    {% elseif nextBirthdays|first.birthday|date('m/d') == "now"|date('m/d') %}
-        {{ wait }};url={{ document.getProperty('birthday_congratulation_navigation') }}
+    {% if nextBirthdays|first.birthday|date('m/d') == "now"|date('m/d') %}
+        {{ wait }};url={{ url[0]['link'].getData() }}
     {% else %}
-        {{ wait }};url={{ document.getProperty('event_list_navigation') }}
+        {{ wait }};url={{ url[1]['link'].getData() }}
     {% endif %}
 {% endblock %}
 

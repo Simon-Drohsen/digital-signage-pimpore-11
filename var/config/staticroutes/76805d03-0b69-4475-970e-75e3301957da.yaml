@@ -1,14 +1,15 @@
 pimcore_static_routes:
     definitions:
         76805d03-0b69-4475-970e-75e3301957da:
-            name: 'birthday list'
-            pattern: /\/birthday-list
-            reverse: /birthday-list
-            controller: 'App\Controller\DefaultController::birthdayListAction'
+            name: birthday_list
+            pattern: /birthday-list/
+            reverse: ''
+            controller: 'App\Controller\BirthdayListController::action'
             variables: ''
             defaults: ''
             siteId: {  }
-            methods: {  }
+            methods:
+                - GET
             priority: 1
             creationDate: 1732105122
-            modificationDate: 1732111120
+            modificationDate: 1732721434

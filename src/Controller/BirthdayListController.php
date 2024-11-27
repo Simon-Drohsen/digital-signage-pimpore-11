@@ -8,12 +8,27 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Pimcore\Model\DataObject\Employee;
 use Pimcore\Model\DataObject\Party;
+use Pimcore\Model\DataObject\Redirect;
 
 class BirthdayListController extends FrontendController
 {
     public function action(Request $request): Response
     {
-        $partyName = $request->attributes->get('routeDocument')->getDocument()->getProperties()['theme']->getData();
+        $redirects = new Redirect\Listing();
+        $redirect = null;
+
+        if($request->attributes->get('contentDocument')->getKey()) {
+            $partyName = $request->attributes->get('contentDocument')->getKey();
+        } else {
+            $partyName = '';
+        }
+
+        foreach ($redirects as $oneRedirect) {
+            if (lcfirst($oneRedirect->getTitle()) === 'birthday-list') {
+                $redirect = $oneRedirect;
+            }
+        }
+
         $days = 366;
         $parties = new Party\Listing();
         $employees = new Employee\Listing();
@@ -34,6 +49,7 @@ class BirthdayListController extends FrontendController
                 'employees' => $sortedEmployees,
                 'nextBirthdays' => $nextBirthdays,
                 'days' => $days,
+                'url' => $redirect->getTo(),
             ]
         );
     }

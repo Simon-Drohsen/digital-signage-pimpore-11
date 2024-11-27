@@ -2,9 +2,9 @@
 
 {% block redirects %}
     {% if fact is null %}
-        0;url={{ document.getProperty('birthday_list_navigation') }}
+        0;url={{ url }}
     {% else %}
-        {{ document.getProperty('redirect_timeout') }};url={{ document.getProperty('birthday_list_navigation') }}
+        {{ timeout }};url={{ url }}
     {% endif %}
 {% endblock %}
 

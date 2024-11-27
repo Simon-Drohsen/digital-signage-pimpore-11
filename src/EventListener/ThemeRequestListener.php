@@ -32,11 +32,11 @@ final class ThemeRequestListener
             return;
         }
 
-        if(!$event->getRequest()->attributes->has('routeDocument')) {
+        if (!$event->getRequest()->attributes->has('_site_path')) {
             return;
         }
 
-        $theme = $event->getRequest()->attributes->get('routeDocument')->getDocument()->getProperties()['theme']->getData();
+        $theme = explode('/', $event->getRequest()->attributes->get('_site_path'))[1];
 
         if ($this->themeRepository->findOneByName('theme/'. $theme)) $this->themeContext->setTheme($this->themeRepository->findOneByName('theme/'. $theme));
     }
