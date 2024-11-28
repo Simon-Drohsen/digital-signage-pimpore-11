@@ -1,0 +1,3 @@
+twig:
+    globals:
+        kernel_public_dir: '%kernel.project_dir%/public/'
