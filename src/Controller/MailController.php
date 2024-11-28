@@ -27,11 +27,13 @@ class MailController extends FrontendController
 
         $mail = $this->findBirthdayReminderMail($employees, $mails, $today);
 
-        if (!$mail) {
+        if ($this->container === null && !$mail) {
             return null;
+        } elseif (!$mail) {
+            return $this->render('mails/template.html.twig');
         }
 
-        if ($this->container !== null) {
+        if ($this->container) {
             return $this->render('mails/template.html.twig', [
                 'mail' => $mail['mail'],
                 'employee' => $mail['employee'],

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Command;
 
 use App\Controller\MailController;
+use Exception;
 use Pimcore\Mail;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -22,9 +23,11 @@ class BirthdayReminderCommand extends Command
         parent::__construct();
     }
 
+    /**
+     * @throws Exception
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $response = Response::HTTP_OK;
         $mailController = new MailController();
 
         $mail = $mailController->birthdayReminderAction();
