@@ -10,6 +10,7 @@ Encore
     .enablePostCssLoader()
     .enableSassLoader()
     .enableVersioning()
+    .addStyleEntry('email', './assets/css/email.css')
     .configureBabel((config) => {
         config.plugins.push('@babel/plugin-proposal-class-properties');
     }, {

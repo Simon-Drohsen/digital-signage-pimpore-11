@@ -13,19 +13,16 @@ use Pimcore\Mail as PimcoreMail;
 
 class MailController extends FrontendController
 {
+
     const int FIRST_REMINDER = 14;
     const int SECOND_REMINDER = 7;
 
-    /**
-     * @throws Exception
-     */
-    public function birthdayReminderAction(): PimcoreMail|Response|null
+    public function birthdayReminderAction($employee): PimcoreMail|Response|null
     {
         $today = $this->getToday();
-        $employees = new Employee\Listing();
         $mails = new BirthdayReminder\Listing();
 
-        $mail = $this->findBirthdayReminderMail($employees, $mails, $today);
+        $mail = $this->findBirthdayReminderMail($employee, $mails, $today);
 
         if ($this->container === null && !$mail) {
             return null;
@@ -47,8 +44,9 @@ class MailController extends FrontendController
     private function getToday(): int
     {
         $tz = new CarbonTimeZone('Europe/Zurich');
-        $today = Carbon::now($tz);
-        return $today->dayOfYear() - 1;
+        $today = Carbon::now($tz)->startOfDay();
+
+        return $today->dayOfYear();
     }
 
     private function isReminderDue(int $today, int $birthday): bool
@@ -59,7 +57,12 @@ class MailController extends FrontendController
     private function findMailInfo(BirthdayReminder\Listing $mails, Employee $employee): ?BirthdayReminder
     {
         foreach ($mails as $oneMail) {
-            if ($oneMail->getParty() === $employee->getParty()) {
+            $mailParty = $oneMail->getParty();
+            $employeeParty = $employee->getParty();
+
+            $mailParty = $this->sortArr($mailParty);
+            $employeeParty = $this->sortArr($employeeParty);
+            if ($mailParty === $employeeParty) {
                 return $oneMail;
             }
         }
@@ -88,29 +91,35 @@ class MailController extends FrontendController
     /**
      * @throws Exception
      */
-    private function findBirthdayReminderMail(Employee\Listing $employees, BirthdayReminder\Listing $mails, int $today): ?array
+    private function findBirthdayReminderMail(Employee $employee, BirthdayReminder\Listing $mails, int $today): ?array
     {
-        foreach ($employees as $oneEmployee) {
-            $birthday = $oneEmployee->getBirthday()?->dayOfYear();
-            if (!$birthday || !$this->isReminderDue($today, $birthday)) {
-                continue;
-            }
-
-            $mailInfos = $this->findMailInfo($mails, $oneEmployee);
-            if (!$mailInfos) {
-                continue;
-            }
-
-            $days = $birthday - $today;
-            $mail = $this->createReminderMail($mailInfos, $oneEmployee, $days);
-
-            return [
-                'mail' => $mail,
-                'employee' => $oneEmployee,
-                'days' => $days,
-            ];
+        $birthday = $employee->getBirthday();
+        $birthday = $birthday->setYear(Carbon::now()->year)->dayOfYear;
+        if (!$birthday || !$this->isReminderDue($today, $birthday)) {
+            return null;
         }
 
-        return null;
+        $mailInfos = $this->findMailInfo($mails, $employee);
+        if (!$mailInfos) {
+            return null;
+        }
+
+        $days = $birthday - $today;
+        $mail = $this->createReminderMail($mailInfos, $employee, $days);
+
+        return [
+            'mail' => $mail,
+            'employee' => $employee,
+            'days' => $days,
+        ];
+    }
+
+    public function sortArr(array $arr): array
+    {
+        $intArray = array_map('intval', $arr);
+        sort($intArray, SORT_NUMERIC);
+        return array_map(function($num) {
+            return str_pad($num, 2, '0', STR_PAD_LEFT);
+        }, $intArray);
     }
 }

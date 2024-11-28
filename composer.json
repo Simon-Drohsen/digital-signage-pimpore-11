@@ -12,6 +12,8 @@
   },
   "prefer-stable": true,
   "require": {
+    "php": ">=8.3",
+    "ext-xsl": "*",
     "dachcom-digital/toolbox": "~5.2.0",
     "nesbot/carbon": "^2.72",
     "passioneight/pimcore-options-providers": "^2.0",
@@ -26,7 +28,9 @@
     "symfony/ux-twig-component": "^2.21",
     "twig/extra-bundle": "^3.15",
     "twig/html-extra": "^3.15",
-    "twig/intl-extra": "^3.15"
+    "twig/intl-extra": "^3.15",
+    "dachcom-digital/emailizr" : "^3.0"
+
   },
   "require-dev": {
     "codeception/codeception": "^5.0.3",
