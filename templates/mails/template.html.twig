@@ -21,7 +21,7 @@
             </div>
 
             <div class="text-center">
-                <p class="text-lg font-semibold">{{ employee.firstname }}'s Geburtstag ist am {{ employee.birthday|date('d. F') }}</p>
+                <p class="text-lg font-semibold">{{ employee.firstname }}'s Geburtstag ist am {{ employee.birthday|format_datetime(pattern: 'd. MMMM', locale: 'de') }}</p>
                 <p>Du hast noch <strong>{{ days }} Tage</strong> Zeit!</p>
             </div>
         {% endif %}

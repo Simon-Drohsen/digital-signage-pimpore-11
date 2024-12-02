@@ -17,8 +17,16 @@ class MailController extends FrontendController
     const int FIRST_REMINDER = 14;
     const int SECOND_REMINDER = 7;
 
-    public function birthdayReminderAction($employee): PimcoreMail|Response|null
+    public function birthdayReminderAction($employee = false): PimcoreMail|Response|null
     {
+        if (!$employee) {
+            return $this->render('mails/template.html.twig');
+        }
+
+        if ((Carbon::now()->year - $employee->getBirthday()->year) % 10 !== 0 && $employee->getBirthday()->year + 18 !== Carbon::now()->year) {
+            return null;
+        }
+
         $today = $this->getToday();
         $mails = new BirthdayReminder\Listing();
 

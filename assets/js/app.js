@@ -1,5 +1,6 @@
 import 'swiper/css/bundle';
 import '../css/app.css';
+import '../css/email.css';
 
 // Start the Stimulus application
 import '../bootstrap';
